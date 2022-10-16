@@ -24,7 +24,9 @@ int	mlx_start_init(t_mlx *mlx, t_admin *admin)
 	if (mlx->imgame == NULL)
 		return (2);
 	mlx_loop_hook(mlx->mlx_ptr, &render, admin);
-	mlx_key_hook(admin->mlx->mlx_win, ft_readkey, admin);
+	mlx_hook(mlx->mlx_win, KeyPress, KeyPressMask, &key_pressed, admin);
+	mlx_hook(mlx->mlx_win, KeyRelease, KeyReleaseMask, &key_released, admin);
+	mlx_hook(mlx->mlx_win, 17, 1L << 17, ft_close, admin);
 	mlx_loop(mlx->mlx_ptr);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->imgame);
 	mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_win);

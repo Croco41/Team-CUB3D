@@ -35,6 +35,10 @@ void	init_map(t_admin *admin)
 
 void	init_player(t_admin *admin)
 {
+	admin->player->key_r = 0;
+	admin->player->key_l = 0;
+	admin->player->key_w = 0;
+	admin->player->key_s = 0;
 	admin->player->move = 0;
 	admin->player->x = 0;
 	admin->player->y = 0;

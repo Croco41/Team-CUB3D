@@ -16,7 +16,12 @@ void drawRays3D(t_admin *admin, t_player *player, t_rays *rays, t_map *map)
 {
 	//int r, mx, my, mp, dof;
 	//double rx, ry, ra, xo, yo;
-	rays->ra = player->pa - (5 * PI / 180);
+	//rays->ra = player->pa - (5 * PI / 180);
+	rays->ra = player->pa - DR * 30;
+	if (rays->ra < 0)
+		rays->ra += 2 * PI;
+	if (rays->ra > 2 * PI)
+		rays->ra -= 2 * PI;
 	admin->rays->r = 0;
 	while (rays->r < 1)
 	{
@@ -78,7 +83,7 @@ printf(RED"pa = [%f] | ra = [%f]"RESET"\n", player->pa * 180 / PI, rays->ra * 18
 
 		}
 		//drawLine(admin, admin->mlx);
-		rays->ra = rays->ra + (PI / 180);
+		// rays->ra = rays->ra + (PI / 180);
 		rays->r++;
 	}
 //printf("hello\n");
@@ -88,7 +93,7 @@ void drawRays3DVerti(t_admin *admin, t_player *player, t_rays *rays, t_map *map)
 {
 	//int r, mx, my, mp, dof;
 	//double rx, ry, ra, xo, yo;
-	rays->ra = player->pa - (5 * PI / 180);
+	//rays->ra = player->pa - (5 * PI / 180);
 	rays->r = 0;
 	while (rays->r < 1)
 	{

@@ -29,8 +29,10 @@ vpath %.c srcs/graphical
 #dans SRC pensez a mute le main G(graphical_launch.c) ou P(main.c) selon les besoins
 
 SRC		=	srcs/graphical/graphical_launch.c \
+			srcs/graphical/gr_closefree.c \
 			srcs/graphical/gr_render.c \
 			srcs/graphical/gr_readkey.c \
+			srcs/graphical/gr_movekey.c \
 			srcs/graphical/gr_movemap_int.c \
 			srcs/graphical/gr_mlx_start.c \
 			srcs/graphical/gr_minimap.c \

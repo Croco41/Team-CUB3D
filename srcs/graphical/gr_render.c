@@ -78,6 +78,7 @@ int	render(t_admin *admin)
 		printf(YELLOW"admin->mlx = %p"RESET"\n", admin->mlx);
 		exit (1);
 	}
+	use_key(admin);
 //printf(RED"REnder:player->px = %d | player->py = %d | adresse player= %p"RESET"\n", admin->player->px, admin->player->py, admin->player );
 	black_image(admin);
 	drawMap2D(admin->mlx, admin->map);
