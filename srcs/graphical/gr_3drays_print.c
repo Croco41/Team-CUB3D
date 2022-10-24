@@ -12,9 +12,57 @@
 
 #include "cub3d.h"
 
-double	get_dist(double px, double py, double hx, double hy)
+double	get_dist(double px, double py, double hvx, double hvy)
 {
-	return (sqrt((hx - px) * (hx - px) + (hy - py) * (hy - py)));
+	//return (sqrt((hx - px) * (hx - px) + (hy - py) * (hy - py)));
+	return (sqrt((hvx - px) * (hvx - px) + (hvy - py) * (hvy - py)));
+}
+
+void	fix_fisheye(t_admin *admin, double dist)
+{
+	double ca;
+
+	ca = admin->player->pa  - admin->rays->ra + PI;
+	if (ca < 0)
+		ca += 2*PI;
+	else if (ca > 2*PI)
+		ca -= 2*PI;
+	admin->rays->distF = dist * cos(ca);
+}
+
+void 	draw_Wall(t_admin *admin, t_map *map, t_mlx *mlx, double dist)
+{
+	int lineH;
+	int baseline;
+	int stopline;
+	int x;
+
+	x = 0;
+	fix_fisheye(admin, dist);
+	lineH = ((map->mapS * mlx->imgame->height) / ((int)dist));
+	//printf(GREEN" dist = %f | lineH = %d | mlx->height = %d "RESET"\n", dist, lineH, mlx->height);
+	// if (lineH > mlx->imgame->height)
+	// 	lineH = mlx->imgame->height;
+	baseline = (mlx->imgame->height / 2) - (lineH / 2);
+	//stopline = (mlx->imgame->height / 2) + (lineH / 2);
+	if (baseline < 0)
+		baseline = 0;
+	stopline = lineH + baseline;
+	//printf(RED"baseline = %d | stopline = %d | lineH = %d | mlx->height = %d "RESET"\n", baseline, stopline, lineH, mlx->height);
+	printf(RED" mlx->imgame->height = %d "RESET"\n", mlx->imgame->height);
+	
+	while (baseline < stopline && baseline < W_HEIGHT)
+	{
+			while (x < 400)
+			{
+			//my_mlx_pixel_put(mlx, dist, admin->player->py, GREEN_PIXEL);
+				my_mlx_pixel_put(mlx, admin->rays->r + x + 530, baseline, GREEN_PIXEL);
+				x++;
+			}
+			//printf("pixelput \n");
+			baseline++;
+			x = 0;
+	}
 }
 
 void	drawLine(t_admin *admin, t_mlx *mlx)
@@ -37,6 +85,7 @@ void	drawLine(t_admin *admin, t_mlx *mlx)
 		admin->rays->ry = admin->rays->hy;
 	}
 	dist = sqrt((admin->rays->rx - admin->player->px) * (admin->rays->rx - admin->player->px) + (admin->rays->ry - admin->player->py) * (admin->rays->ry - admin->player->py));
+	admin->rays->distF = dist;
 	while (x < 100)
 	{
 		// dist = admin->player->px + (cos(admin->rays->ra) * x * (admin->rays->rx /100));

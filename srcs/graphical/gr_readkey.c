@@ -48,6 +48,6 @@ int	key_pressed(int keycode, t_admin *admin)
 	if (keycode == 115)
 		admin->player->key_s = 1;
 	if (keycode == 65307)
-		ft_close(admin);
+		ft_closeok(admin);
 	return (0);
 }

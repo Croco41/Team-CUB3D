@@ -15,7 +15,7 @@
 // impression du pixel
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
-//printf(RED"img->width = %d | x = %d | y = %d"RESET"\n", mlx->window->width, x, y);
+//printf(RED"img->width = %d | x = %d | y = %d"RESET"\n", mlx->imgame->width, x, y);
 // printf(RED"x = %d | y = %d"RESET"\n", x, y);
 	((int *)mlx->imgame->data)[y * mlx->imgame->width + x] = color;
 }
@@ -64,7 +64,7 @@ void	drawPlayer(t_admin *admin, t_mlx *mlx, t_player *player)
 		x = 0;
 	}
 	drawRays3D(admin, admin->player, admin->rays, admin->map);
-	drawRays3DVerti(admin, admin->player, admin->rays, admin->map);
+	//drawRays3DVerti(admin, admin->player, admin->rays, admin->map);
 	//drawLine(admin, mlx);
 }
 

@@ -22,10 +22,11 @@
 
 # define BUFFER_SIZE 1024
 # define PIX 64
-# define W_WIDTH 1500//512 //1500 //400 //1920
-# define W_HEIGHT 920//512 //920 //301 //1080
+# define W_WIDTH 1024//512 //1500 //400 //1920
+# define W_HEIGHT 512//512 //920 //301 //1080
 
 #define PI 3.14159265359
+#define DR 0.0174533 // one degree in radians
 
 // typedef struct s_img
 // {
@@ -53,6 +54,7 @@ typedef struct s_rays
 	double	yo;
 	double	distH;
 	double  distV;
+	double	distF;
 	double	hx;
 	double	hy;
 	double 	vx;
@@ -75,6 +77,10 @@ typedef struct s_mlx
 
 typedef struct s_player
 {
+	int			key_r;
+	int			key_l;
+	int			key_w;
+	int			key_s;
 	int			move;
 	int			px;
 	int			py;
@@ -135,14 +141,28 @@ void	drawMap2D(t_mlx *mlx, t_map *map);
 
 //--rayon 3D---//
 
-double	get_dist(double px, double py, double hx, double hy);
+double	get_dist(double px, double py, double hvx, double hvy);
 void	drawLine(t_admin *admin, t_mlx *mlx);
+void 	draw_Wall(t_admin *admin, t_map *map, t_mlx *mlx, double dist);
+
+void	Rays_distancecheck(t_player *player, t_rays *rays, t_map *map, int order);
+void	Rays_horizontalcheck(t_player *player, t_rays *rays);
+void	Rays_verticalcheck(t_player *player, t_rays *rays);
 void	drawRays3D(t_admin *admin, t_player *player, t_rays *rays, t_map *map);
-void	drawRays3DVerti(t_admin *admin, t_player *player, t_rays *rays, t_map *map);
+//void	drawRays3Dold(t_admin *admin, t_player *player, t_rays *rays, t_map *map);
+//void	drawRays3DVerti(t_admin *admin, t_player *player, t_rays *rays, t_map *map);
 
 //---Interpretation keyboard---//
 
-int	ft_readkey(int keycode, t_admin *admin);
+//int	ft_readkey(int keycode, t_admin *admin); ancienne version//
+void	turn_right(t_player *player);
+void	turn_left(t_player *player);
+void	move_up(t_map *map, t_player *player);
+void	move_down(t_map *map, t_player *player);
+
+int	key_pressed(int keycode, t_admin *admin);
+int	key_released(int keycode, t_admin *admin);
+void	use_key(t_admin *admin);
 
 //--manipulation du tableau int - MAP ----//
 
@@ -154,6 +174,11 @@ int	get_coord(int x, t_map *map);
 int	main(void);
 void	init_struct(t_admin *admin);
 int	mlx_start_init(t_mlx *mlx, t_admin *admin);
+
+//--close------//
+
+int	ft_closeok(t_admin *admin);
+int	ft_close(t_admin *admin);
 
 /*
 *---------------PARSING PART----------------------------------*
