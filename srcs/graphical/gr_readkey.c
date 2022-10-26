@@ -14,10 +14,14 @@
 
 void	use_key(t_admin *admin)
 {
-	if (admin->player->key_l == 1)
+	if (admin->player->key_fl == 1)
 		turn_left(admin->player);
-	if (admin->player->key_r == 1)
+	if (admin->player->key_fr == 1)
 		turn_right(admin->player);
+	if (admin->player->key_l == 1)
+		move_left(admin->map, admin->player);
+	if (admin->player->key_r == 1)
+		move_right(admin->map, admin->player);
 	if (admin->player->key_w == 1)
 		move_up(admin->map, admin->player);
 	if (admin->player->key_s == 1)
@@ -34,6 +38,10 @@ int	key_released(int keycode, t_admin *admin)
 		admin->player->key_w = 0;
 	if (keycode == 115)
 		admin->player->key_s = 0;
+	if (keycode == 65361)
+		admin->player->key_fl = 0;
+	if (keycode == 65363)
+		admin->player->key_fr = 0;
 	return (0);
 }
 
@@ -47,6 +55,10 @@ int	key_pressed(int keycode, t_admin *admin)
 		admin->player->key_w = 1;
 	if (keycode == 115)
 		admin->player->key_s = 1;
+	if (keycode == 65361)
+		admin->player->key_fl = 1;
+	if (keycode == 65363)
+		admin->player->key_fr = 1;
 	if (keycode == 65307)
 		ft_closeok(admin);
 	return (0);

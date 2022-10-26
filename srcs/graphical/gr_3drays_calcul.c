@@ -120,7 +120,7 @@ void	drawRays3D(t_admin *admin, t_player *player, t_rays *rays, t_map *map)
 	if (rays->ra > 2 * PI)
 		rays->ra -= 2 * PI;
 	admin->rays->r = 0;
-	while (rays->r < 60)
+	while (rays->r < (W_WIDTH / 2))
 	{
 		rays->distH = 1000000.0;
 		rays->distV = 1000000.0;
@@ -136,7 +136,7 @@ void	drawRays3D(t_admin *admin, t_player *player, t_rays *rays, t_map *map)
 		draw_Wall(admin, admin->map, admin->mlx, admin->rays->distF);
 
 		//rays->ra = rays->ra + (PI / 180);
-		rays->ra += DR;
+		rays->ra += DR * ((60 / 1500.0));
 		if (rays->ra < 0)
 		rays->ra += 2 * PI;
 		if (rays->ra > 2 * PI)

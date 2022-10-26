@@ -33,13 +33,16 @@ void	black_image(t_admin *admin)
 	{
 		while (i < W_WIDTH)
 		{
-			my_mlx_pixel_put(admin->mlx, i, j, 0x000000);
+			my_mlx_pixel_put(admin->mlx, i, j, GRAY_PIXEL);
 			i++;
 		}
 		j++;
 		i = 0;
 	}
+	draw_floor(admin);
 }
+
+
 
 // representation sur ma minimap de mon player, avec quelques pixels de cote
 // pour ameliorer la visibilite a l'affichage

@@ -33,6 +33,7 @@ SRC		=	srcs/graphical/graphical_launch.c \
 			srcs/graphical/gr_render.c \
 			srcs/graphical/gr_readkey.c \
 			srcs/graphical/gr_movekey.c \
+			srcs/graphical/gr_move_speed.c \
 			srcs/graphical/gr_movemap_int.c \
 			srcs/graphical/gr_mlx_start.c \
 			srcs/graphical/gr_minimap.c \

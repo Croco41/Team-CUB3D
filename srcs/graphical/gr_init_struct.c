@@ -40,6 +40,8 @@ void	init_player(t_admin *admin)
 	admin->player->key_w = 0;
 	admin->player->key_s = 0;
 	admin->player->move = 0;
+	admin->player->key_fr = 0;
+	admin->player->key_fl = 0;
 	admin->player->x = 0;
 	admin->player->y = 0;
 	admin->player->px = 300;

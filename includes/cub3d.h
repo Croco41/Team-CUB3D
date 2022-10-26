@@ -18,15 +18,18 @@
 #define GRAY_PIXEL 0x808080
 #define WHITE_PIXEL 0xFFFFFF
 #define GREEN_PIXEL 0x33FF66
+#define FGREEN_PIXEL 0x21A342
 #define YELLOW_PIXEL 0xFFFF66
+#define CYAN_PIXEL 0x00CCCC
 
 # define BUFFER_SIZE 1024
 # define PIX 64
 # define W_WIDTH 1024//512 //1500 //400 //1920
 # define W_HEIGHT 512//512 //920 //301 //1080
 
+#define SPEED 1.5
 #define PI 3.14159265359
-#define DR 0.0174533 // one degree in radians
+#define DR 0.0174533 // one degree in radians, pi/180
 
 // typedef struct s_img
 // {
@@ -81,6 +84,8 @@ typedef struct s_player
 	int			key_l;
 	int			key_w;
 	int			key_s;
+	int			key_fr;
+	int			key_fl;
 	int			move;
 	int			px;
 	int			py;
@@ -128,6 +133,7 @@ typedef struct s_admin
 
 //--rendu affichage--//
 
+void 	draw_floor(t_admin *admin);
 void	black_image(t_admin *admin);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
@@ -157,6 +163,8 @@ void	drawRays3D(t_admin *admin, t_player *player, t_rays *rays, t_map *map);
 //int	ft_readkey(int keycode, t_admin *admin); ancienne version//
 void	turn_right(t_player *player);
 void	turn_left(t_player *player);
+void	move_right(t_map *map, t_player *player);
+void	move_left(t_map *map, t_player *player);
 void	move_up(t_map *map, t_player *player);
 void	move_down(t_map *map, t_player *player);
 

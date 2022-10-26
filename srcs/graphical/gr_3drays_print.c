@@ -30,16 +30,37 @@ void	fix_fisheye(t_admin *admin, double dist)
 	admin->rays->distF = dist * cos(ca);
 }
 
+void draw_floor(t_admin *admin)
+{
+	int	i; 
+	int	j;
+
+	j = W_HEIGHT / 2;
+	i = W_WIDTH / 2 + 1;
+	while (j > 0)
+	{
+		while (i < W_WIDTH)
+		{
+			my_mlx_pixel_put(admin->mlx, i, j, CYAN_PIXEL);
+			i++;
+		}
+		j--;
+		i = W_WIDTH / 2 + 1;;
+	}
+}
+
 void 	draw_Wall(t_admin *admin, t_map *map, t_mlx *mlx, double dist)
 {
 	int lineH;
 	int baseline;
 	int stopline;
-	int x;
-
-	x = 0;
+	
+	if (dist < 1)
+		dist = 1;
 	fix_fisheye(admin, dist);
+	//printf(YELLOW" dist = %f "RESET"\n", dist);
 	lineH = ((map->mapS * mlx->imgame->height) / ((int)dist));
+	//printf(GREEN" dist = %f | lineH = %d "RESET"\n", dist, lineH);
 	//printf(GREEN" dist = %f | lineH = %d | mlx->height = %d "RESET"\n", dist, lineH, mlx->height);
 	// if (lineH > mlx->imgame->height)
 	// 	lineH = mlx->imgame->height;
@@ -49,19 +70,24 @@ void 	draw_Wall(t_admin *admin, t_map *map, t_mlx *mlx, double dist)
 		baseline = 0;
 	stopline = lineH + baseline;
 	//printf(RED"baseline = %d | stopline = %d | lineH = %d | mlx->height = %d "RESET"\n", baseline, stopline, lineH, mlx->height);
-	printf(RED" mlx->imgame->height = %d "RESET"\n", mlx->imgame->height);
-	
+	// printf(RED" mlx->imgame->height = %d "RESET"\n", mlx->imgame->height);
+	// printf(YELLOW" dist = %f | lineH = %d "RESET"\n", dist, lineH);
 	while (baseline < stopline && baseline < W_HEIGHT)
 	{
-			while (x < 400)
-			{
+				if (admin->rays->distV < admin->rays->distH)
+				{
+					my_mlx_pixel_put(mlx, admin->rays->r + 512, baseline, FGREEN_PIXEL);
+					//printf(GREEN" dist = %f | lineH = %d "RESET"\n", dist, lineH);
+				}
+				else
+				{
+					my_mlx_pixel_put(mlx, admin->rays->r + 512, baseline, GREEN_PIXEL);
+					//printf(YELLOW" dist = %f | lineH = %d "RESET"\n", dist, lineH);			
+				}
 			//my_mlx_pixel_put(mlx, dist, admin->player->py, GREEN_PIXEL);
-				my_mlx_pixel_put(mlx, admin->rays->r + x + 530, baseline, GREEN_PIXEL);
-				x++;
-			}
+				 //my_mlx_pixel_put(mlx, admin->rays->r + x + 530, baseline/2, GREEN_PIXEL);
 			//printf("pixelput \n");
 			baseline++;
-			x = 0;
 	}
 }
 
@@ -96,7 +122,10 @@ void	drawLine(t_admin *admin, t_mlx *mlx)
 		if (admin->player->px < admin->map->sizeline * 64 && admin->player->py < admin->map->nbline * 64)
 		{
 			//my_mlx_pixel_put(mlx, dist, admin->player->py, GREEN_PIXEL);
-			my_mlx_pixel_put(mlx, finalx, finaly, GREEN_PIXEL);
+			// if (admin->rays->distV < admin->rays->distH)
+			// 	my_mlx_pixel_put(mlx, finalx, finaly, FGREEN_PIXEL);
+			// else
+				my_mlx_pixel_put(mlx, finalx, finaly, GREEN_PIXEL);
 		}	
 		x++;
 	}
