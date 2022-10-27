@@ -23,7 +23,6 @@ void	Rays_distancecheck(t_player *player, t_rays *rays, t_map *map, int order)
 	//printf(YELLOW"rays->mp: %d, {rays->mx} : %d "RESET"\n", (rays->mp), rays->mx);
 			if (rays->mp > 0 && rays->mp < map->mapS && map->map[rays->mp] == 1)
 			{
-				
 				if (order == 0)
 				{
 					rays->hx = rays->rx;
