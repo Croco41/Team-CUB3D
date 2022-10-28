@@ -25,12 +25,13 @@ void	init_mlx(t_admin *admin)
 void	init_map(t_admin *admin)
 {
 	//admin->map->map = ;
-	admin->map->nbexit = 0;
 	admin->map->other = 0;
 	admin->map->error = 0;
+	admin->map->sizeline = 0;
 	admin->map->nbline = 0;
 	admin->map->px = -1;
 	admin->map->py = -1;
+	admin->map->reduc = 2;
 }
 
 void	init_player(t_admin *admin)
@@ -44,9 +45,9 @@ void	init_player(t_admin *admin)
 	admin->player->key_fl = 0;
 	admin->player->x = 0;
 	admin->player->y = 0;
-	admin->player->px = 300;
-	admin->player->py = 300;
-	admin->player->pa = PI / 2;
+	// admin->player->px = 300;
+	// admin->player->py = 300;
+	// admin->player->pa = PI / 2;
 	admin->player->pdx = cos(admin->player->pa) * 5;
 	admin->player->pdy = sin(admin->player->pa) * 5;
 }
@@ -65,10 +66,19 @@ void	init_rays(t_admin *admin)
 	admin->rays->yo = 0;
 }
 
+void	init_text(t_admin *admin)
+{
+	admin->text->TE = NULL;
+	admin->text->TW = NULL;
+	admin->text->TS = NULL;
+	admin->text->TN = NULL;
+}
+
 void	init_struct(t_admin *admin)
 {
 	init_mlx(admin);
 	init_map(admin);
 	init_rays(admin);
 	init_player(admin);
+	init_text(admin);
 }

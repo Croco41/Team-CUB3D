@@ -20,6 +20,8 @@ int	mlx_start_init(t_mlx *mlx, t_admin *admin)
 	mlx->mlx_win = mlx_new_window(mlx->mlx_ptr, W_WIDTH, W_HEIGHT, "CUB3D");
 	if (mlx->mlx_win == NULL)
 		return (1);
+	if (init_texture(admin, admin->text))
+		return(ft_close(admin));
 	mlx->imgame = mlx_new_image(mlx->mlx_ptr, W_WIDTH, W_HEIGHT);
 	if (mlx->imgame == NULL)
 		return (2);

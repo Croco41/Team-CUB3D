@@ -57,7 +57,7 @@ void	Rays_horizontalcheck(t_player *player, t_rays *rays)
 		//looking down
 		if (rays->ra > PI)
 		{
-			rays->ry = (((int)player->py>>6)<<6) - 0.0001; //s'assurer qu'on soit en float et decalage de 6 bits 
+			rays->ry = (((int)player->py >> 6) << 6) - 0.0001; //s'assurer qu'on soit en float et decalage de 6 bits 
 			rays->rx = (player->py - rays->ry)*aTan + player->px;
 			rays->yo = -64;
 			rays->xo = -rays->yo * aTan;
@@ -65,7 +65,7 @@ void	Rays_horizontalcheck(t_player *player, t_rays *rays)
 		//looking up
 		else if (rays->ra < PI)
 		{
-			rays->ry = (((int)player->py>>6)<<6) + 64;
+			rays->ry = (((int)player->py >> 6) << 6) + 64;
 			rays->rx = (player->py - rays->ry)*aTan + player->px;
 	//printf(BLUE"rays->rx: %f, rays->ry: %f, {player->py} : %d "RESET"\n", (rays->rx), rays->ry, player->py);
 			rays->yo = 64;
@@ -113,13 +113,13 @@ void	Rays_verticalcheck(t_player *player, t_rays *rays)
 
 void	drawRays3D(t_admin *admin, t_player *player, t_rays *rays, t_map *map)
 {
-	rays->ra = player->pa - DR * 30;
+	rays->ra = player->pa- DR * 30;
 	if (rays->ra < 0)
 		rays->ra += 2 * PI;
 	if (rays->ra > 2 * PI)
 		rays->ra -= 2 * PI;
 	admin->rays->r = 0;
-	while (rays->r < (W_WIDTH / 2))
+	while (rays->r < (W_WIDTH))
 	{
 		rays->distH = 1000000.0;
 		rays->distV = 1000000.0;
@@ -131,8 +131,8 @@ void	drawRays3D(t_admin *admin, t_player *player, t_rays *rays, t_map *map)
 		Rays_distancecheck(player, rays, map, 0);
 		Rays_verticalcheck(player, rays);
 		Rays_distancecheck(player, rays, map, 1);
-		drawLine(admin, admin->mlx);
-		draw_Wall(admin, admin->map, admin->mlx, admin->rays->distF);
+		drawLine(admin);
+		draw_Wall(admin, admin->mlx, admin->rays->distF);
 
 		//rays->ra = rays->ra + (PI / 180);
 		rays->ra += DR * ((60 / 1500.0));

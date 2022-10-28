@@ -29,7 +29,7 @@ void	black_image(t_admin *admin)
 
 	j = 0;
 	i = 0;
-	while (j < W_HEIGHT)
+	while (j < W_HEIGHT) 
 	{
 		while (i < W_WIDTH)
 		{
@@ -42,8 +42,21 @@ void	black_image(t_admin *admin)
 	draw_floor(admin);
 }
 
+void	drawPlayer_direct(t_player *player, t_admin *admin, double pa, double lon)
+{
+	int p;
+	double px;
+	double py;
 
-
+	p = 0;
+	while (p++ < 100)
+	{
+		px = (player->px + (cos(pa) * p * (lon / 100))) / admin->map->reduc;
+		py = (player->py + (sin(pa) * p * (lon / 100))) / admin->map->reduc;
+		if (px < admin->map->sizeline * PIX && py < admin->map->nbline * PIX)
+			my_mlx_pixel_put(admin->mlx, px, py, YELLOW_PIXEL);
+	}
+}
 // representation sur ma minimap de mon player, avec quelques pixels de cote
 // pour ameliorer la visibilite a l'affichage
 // j'appelle ici aussi mes rayons 3D, calculant la distance jusqu'a un 1(mur),
@@ -54,19 +67,20 @@ void	drawPlayer(t_admin *admin, t_mlx *mlx, t_player *player)
 	int	x;
 	int	y;
 
-	x = 0;
-	y = 0;
-	while (y < 5)
+	x = -2;
+	y = -2;
+	while (y < 3)
 	{
-		while (x < 5)
+		while (x < 3)
 		{
-			my_mlx_pixel_put(mlx, player->px + x, player->py + y, 0xFFFF66);
+			my_mlx_pixel_put(mlx, (player->px + x) / admin->map->reduc, (player->py + y) / admin->map->reduc, 0xFFFF66);
 			x++;
 		}
 		y++;
-		x = 0;
+		x = -2;
 	}
-	drawRays3D(admin, admin->player, admin->rays, admin->map);
+	drawPlayer_direct(player, admin, player->pa, 30.0);
+//drawRays3D(admin, admin->player, admin->rays, admin->map);
 	//drawRays3DVerti(admin, admin->player, admin->rays, admin->map);
 	//drawLine(admin, mlx);
 }
@@ -84,8 +98,10 @@ int	render(t_admin *admin)
 	use_key(admin);
 //printf(RED"REnder:player->px = %d | player->py = %d | adresse player= %p"RESET"\n", admin->player->px, admin->player->py, admin->player );
 	black_image(admin);
+	drawRays3D(admin, admin->player, admin->rays, admin->map);
 	drawMap2D(admin->mlx, admin->map);
 	drawPlayer(admin, admin->mlx, admin->player);
 	mlx_put_image_to_window(admin->mlx->mlx_ptr, admin->mlx->mlx_win, admin->mlx->imgame, 0, 0);
+	
 	return (0);
 }

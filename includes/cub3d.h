@@ -31,8 +31,8 @@
 #define PI 3.14159265359
 #define DR 0.0174533 // one degree in radians, pi/180
 
-#define TEXT_H 32
-#define	TEXT_W 32
+#define TEXT_H 64
+#define	TEXT_W 64
 
 // typedef struct s_img
 // {
@@ -75,10 +75,6 @@ typedef struct s_mlx
 	int			width;
 	int			height;
 	t_img		*imgame;
-	t_img		plaf;
-	t_img		ground;
-	t_img		wall;
-	t_img		exit;
 }				t_mlx;
 
 typedef struct s_player
@@ -102,16 +98,25 @@ typedef struct s_player
 
 typedef	struct s_text
 {
-	int			*text_N;
-	int			*text_S;
-	int			*text_E;
-	int			*text_W;
+	// int			*text_N;
+	// int			*text_S;
+	// int			*text_E;
+	// int			*text_W;
+	char			*text_N;
+	char			*text_S;
+	char			*text_E;
+	char			*text_W;
+	t_img		*TE;
+	t_img		*TW;
+	t_img		*TS;
+	t_img		*TN;
+	float		tx;
+	float		ty;
 }				t_text;
 
 typedef struct s_map
 {
 	int			*map;
-	int			nbexit;
 	int			sizeline;
 	int			nbline;
 	int			px;
@@ -127,6 +132,7 @@ typedef struct s_map
 	int		flo;
 	int		cel;
 	int		fd;
+	int 	reduc;
 	//t_player	*player;
 }				t_map;
 
@@ -150,6 +156,11 @@ void 	draw_floor(t_admin *admin);
 void	black_image(t_admin *admin);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
+//--rendu affichage texture -- //
+
+int		find_color(t_text *text, char d);
+
+
 //--rendu affichage minimap----//
 
 int	render(t_admin *admin);
@@ -161,8 +172,8 @@ void	drawMap2D(t_mlx *mlx, t_map *map);
 //--rayon 3D---//
 
 double	get_dist(double px, double py, double hvx, double hvy);
-void	drawLine(t_admin *admin, t_mlx *mlx);
-void 	draw_Wall(t_admin *admin, t_map *map, t_mlx *mlx, double dist);
+void	drawLine(t_admin *admin);
+void 	draw_Wall(t_admin *admin, t_mlx *mlx, double dist);
 
 void	Rays_distancecheck(t_player *player, t_rays *rays, t_map *map, int order);
 void	Rays_horizontalcheck(t_player *player, t_rays *rays);
@@ -195,6 +206,9 @@ int	get_coord(int x, t_map *map);
 int	main(void);
 void	init_struct(t_admin *admin);
 int	mlx_start_init(t_mlx *mlx, t_admin *admin);
+int		init_texture(t_admin *admin, t_text *text);
+void	init_player_position(t_map *map, t_player *player);
+
 
 //--close------//
 

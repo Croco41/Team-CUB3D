@@ -12,16 +12,16 @@
 
 #include "cub3d.h"
 
-void	ft_free_all_mlx(t_mlx *mlx)
+void	ft_free_all_mlx(t_admin *admin, t_mlx *mlx)
 {
-	// if (mlx->coll.img)
-	// 	mlx_destroy_image(mlx->mlx, mlx->coll.img);
-	// if (mlx->ground.img)
-	// 	mlx_destroy_image(mlx->mlx, mlx->ground.img);
-	// if (mlx->wall.img)
-	// 	mlx_destroy_image(mlx->mlx, mlx->wall.img);
-	// if (mlx->exit.img)
-	// 	mlx_destroy_image(mlx->mlx, mlx->exit.img);
+	if (admin->text->TE)
+		mlx_destroy_image(mlx->mlx_ptr, admin->text->TE);
+	if (admin->text->TW)
+		mlx_destroy_image(mlx->mlx_ptr, admin->text->TW);
+	if (admin->text->TS)
+		mlx_destroy_image(mlx->mlx_ptr, admin->text->TS);
+	if (admin->text->TN)
+		mlx_destroy_image(mlx->mlx_ptr, admin->text->TN);
 	if (mlx->imgame)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->imgame);
 	// if (mlx->mlx_win.img)
@@ -41,7 +41,7 @@ void	ft_free_all_mlx(t_mlx *mlx)
 int	ft_close(t_admin *admin)
 {
 	if (admin->mlx->mlx_ptr)
-		ft_free_all_mlx(admin->mlx);
+		ft_free_all_mlx(admin, admin->mlx);
 	// if (admin->map.map)
 	// 	ft_free_map(&admin->map);
 	return (1);
