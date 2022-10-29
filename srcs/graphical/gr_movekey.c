@@ -30,14 +30,14 @@ void	move_up(t_map *map, t_player *player)
 
 	x = pushaway_player(player->pdx);
 	y = pushaway_player(player->pdy);
-	next_x = ((player->px + player->pdx + x) / map->mapS);
-	next_y = ((player->py + player->pdy + y) / map->mapS);
+	next_x = ((player->px + player->pdx + x) / PIX);
+	next_y = ((player->py + player->pdy + y) / PIX);
 //printf(GREEN"ICIW119 [pdx] %f | [pdy] %f "RESET"\n", admin->player->pdx, admin->player->pdy);
-	if (map->map[get_int(next_x, (player->py / map->mapS), map)] == 0 || 
-				ft_strchr(map->map[get_int(next_x, (player->py / map->mapS), map)], "NSEW"))
+	if (map->map[get_int(next_x, (player->py / PIX), map)] == 0 || 
+				ft_strchr(map->map[get_int(next_x, (player->py / PIX), map)], "NSEW"))
 		player->px += player->pdx * SPEED;
-	if (map->map[get_int((player->px / map->mapS), next_y, map)] == 0 ||
-				ft_strchr(map->map[get_int((player->px / map->mapS), next_y, map)], "NSEW"))
+	if (map->map[get_int((player->px / PIX), next_y, map)] == 0 ||
+				ft_strchr(map->map[get_int((player->px / PIX), next_y, map)], "NSEW"))
 		player->py += player->pdy * SPEED;
 }
 
@@ -50,13 +50,13 @@ void	move_down(t_map *map, t_player *player)
 
 	x = pushaway_player(player->pdx);
 	y = pushaway_player(player->pdy);
-	next_x = ((player->px - player->pdx - x) / map->mapS);
-	next_y = ((player->py - player->pdy - y) / map->mapS);
-	if (map->map[get_int(next_x, (player->py / map->mapS), map)] == 0 ||
-				ft_strchr(map->map[get_int(next_x, (player->py / map->mapS), map)], "NSEW"))
+	next_x = ((player->px - player->pdx - x) / PIX);
+	next_y = ((player->py - player->pdy - y) / PIX);
+	if (map->map[get_int(next_x, (player->py / PIX), map)] == 0 ||
+				ft_strchr(map->map[get_int(next_x, (player->py / PIX), map)], "NSEW"))
 		player->px -= player->pdx * SPEED;
-	if (map->map[get_int((player->px / map->mapS), next_y, map)] == 0 ||
-				ft_strchr(map->map[get_int((player->px / map->mapS), next_y, map)], "NSEW"))			
+	if (map->map[get_int((player->px / PIX), next_y, map)] == 0 ||
+				ft_strchr(map->map[get_int((player->px / PIX), next_y, map)], "NSEW"))			
 		player->py -= player->pdy * SPEED;
 }
 
@@ -69,13 +69,13 @@ void	move_right(t_map *map, t_player *player)
 
 	x = pushaway_player(player->pdx);
 	y = pushaway_player(player->pdy);
-	next_x = ((player->px - player->pdy - y) / map->mapS);
-	next_y = ((player->py + player->pdx + x) / map->mapS);
-	if (map->map[get_int(next_x, (player->py / map->mapS), map)] == 0 ||
-				ft_strchr(map->map[get_int(next_x, (player->py / map->mapS), map)], "NSEW"))
+	next_x = ((player->px - player->pdy - y) / PIX);
+	next_y = ((player->py + player->pdx + x) / PIX);
+	if (map->map[get_int(next_x, (player->py / PIX), map)] == 0 ||
+				ft_strchr(map->map[get_int(next_x, (player->py / PIX), map)], "NSEW"))
 		player->px -= player->pdy * SPEED;
-	if (map->map[get_int((player->px / map->mapS), next_y, map)] == 0 ||
-				ft_strchr(map->map[get_int((player->px / map->mapS), next_y, map)], "NSEW"))
+	if (map->map[get_int((player->px / PIX), next_y, map)] == 0 ||
+				ft_strchr(map->map[get_int((player->px / PIX), next_y, map)], "NSEW"))
 		player->py += player->pdx * SPEED;
 }
 
@@ -88,12 +88,12 @@ void	move_left(t_map *map, t_player *player)
 
 	x = pushaway_player(player->pdx);
 	y = pushaway_player(player->pdy);
-	next_x = ((player->px + player->pdy + y) / map->mapS);
-	next_y = ((player->py - player->pdx - x) / map->mapS);
-	if (map->map[get_int(next_x, (player->py / map->mapS), map)] == 0 ||
-				ft_strchr(map->map[get_int(next_x, (player->py / map->mapS), map)], "NSEW"))
+	next_x = ((player->px + player->pdy + y) / PIX);
+	next_y = ((player->py - player->pdx - x) / PIX);
+	if (map->map[get_int(next_x, (player->py / PIX), map)] == 0 ||
+				ft_strchr(map->map[get_int(next_x, (player->py / PIX), map)], "NSEW"))
 		player->px += player->pdy * SPEED;
-	if (map->map[get_int((player->px / map->mapS), next_y, map)] == 0 ||
-				ft_strchr(map->map[get_int((player->px / map->mapS), next_y, map)], "NSEW"))
+	if (map->map[get_int((player->px / PIX), next_y, map)] == 0 ||
+				ft_strchr(map->map[get_int((player->px / PIX), next_y, map)], "NSEW"))
 		player->py -= player->pdx * SPEED;
 }

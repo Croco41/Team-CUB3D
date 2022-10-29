@@ -15,8 +15,6 @@
 // impression du pixel
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
-//printf(RED"img->width = %d | x = %d | y = %d"RESET"\n", mlx->imgame->width, x, y);
-// printf(RED"x = %d | y = %d"RESET"\n", x, y);
 	((int *)mlx->imgame->data)[y * mlx->imgame->width + x] = color;
 }
 
@@ -24,12 +22,12 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 //vouee a disparaitre
 void	black_image(t_admin *admin)
 {
-	int	i; 
+	int	i;
 	int	j;
 
 	j = 0;
 	i = 0;
-	while (j < W_HEIGHT) 
+	while (j < W_HEIGHT)
 	{
 		while (i < W_WIDTH)
 		{
@@ -42,11 +40,11 @@ void	black_image(t_admin *admin)
 	draw_floor(admin);
 }
 
-void	drawPlayer_direct(t_player *player, t_admin *admin, double pa, double lon)
+void	drawplay_direct(t_player *player, t_admin *admin, double pa, double lon)
 {
-	int p;
-	double px;
-	double py;
+	int		p;
+	double	px;
+	double	py;
 
 	p = 0;
 	while (p++ < 100)
@@ -61,9 +59,11 @@ void	drawPlayer_direct(t_player *player, t_admin *admin, double pa, double lon)
 // pour ameliorer la visibilite a l'affichage
 // j'appelle ici aussi mes rayons 3D, calculant la distance jusqu'a un 1(mur),
 // me servira pour l'affichage des textures a la bonne distance
-void	drawPlayer(t_admin *admin, t_mlx *mlx, t_player *player)
+
+//printf(GREEN"player->px = %d | player->py = %d | adresse player= %p"RESET"\n"
+//, player->px, player->py, admin->player );
+void	drawplayer(t_admin *admin, t_mlx *mlx, t_player *player)
 {
-//printf(GREEN"player->px = %d | player->py = %d | adresse player= %p"RESET"\n", player->px, player->py, admin->player );
 	int	x;
 	int	y;
 
@@ -73,17 +73,18 @@ void	drawPlayer(t_admin *admin, t_mlx *mlx, t_player *player)
 	{
 		while (x < 3)
 		{
-			my_mlx_pixel_put(mlx, (player->px + x) / admin->map->reduc, (player->py + y) / admin->map->reduc, 0xFFFF66);
+			my_mlx_pixel_put(mlx, (player->px + x) / admin->map->reduc,
+				(player->py + y) / admin->map->reduc, 0xFFFF66);
 			x++;
 		}
 		y++;
 		x = -2;
 	}
-	drawPlayer_direct(player, admin, player->pa, 30.0);
+	drawplay_direct(player, admin, player->pa, 30.0); 
+}
 //drawRays3D(admin, admin->player, admin->rays, admin->map);
 	//drawRays3DVerti(admin, admin->player, admin->rays, admin->map);
 	//drawLine(admin, mlx);
-}
 
 // gestionnaire de ma partie minimap, lance la fonction qui affiche des pixels 
 // differents en fonction de 0(sol) ou 1(mur)
@@ -96,12 +97,11 @@ int	render(t_admin *admin)
 		exit (1);
 	}
 	use_key(admin);
-//printf(RED"REnder:player->px = %d | player->py = %d | adresse player= %p"RESET"\n", admin->player->px, admin->player->py, admin->player );
 	black_image(admin);
-	drawRays3D(admin, admin->player, admin->rays, admin->map);
-	drawMap2D(admin->mlx, admin->map);
-	drawPlayer(admin, admin->mlx, admin->player);
-	mlx_put_image_to_window(admin->mlx->mlx_ptr, admin->mlx->mlx_win, admin->mlx->imgame, 0, 0);
-	
+	drawrays3d(admin, admin->player, admin->rays, admin->map);
+	drawmap2d(admin->mlx, admin->map);
+	drawplayer(admin, admin->mlx, admin->player);
+	mlx_put_image_to_window(admin->mlx->mlx_ptr, admin->mlx->mlx_win,
+		admin->mlx->imgame, 0, 0);
 	return (0);
 }

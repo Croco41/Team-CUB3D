@@ -12,33 +12,14 @@
 
 #include "cub3d.h"
 
-void	color_cube(t_mlx *mlx, t_map *map, int color)
-{
-	int	i;
-	int	j;
-
-	map->px *= map->mapS;
-	map->py *= map->mapS;
-	i = map->mapS - 1;
-	j = 0;
-	while (j < map->mapS - 1)
-	{
-		while (i > 0)
-		{
-			my_mlx_pixel_put(mlx, map->px + i, map->py + j, color);
-			i--;
-		}
-		i = map->mapS - 1;
-		j++;
-	}
-}
-
+//COLOR_CUBE_BONUS: ici on colorie chaque cube avec la couleur donee 
+//dans drawmap2d, avec une ligne de separation en  black pixel entre les cases
 void	color_cube_bonus(t_mlx *mlx, t_map *map, int color)
 {
 	int	i;
 	int	j;
-	int px;
-	int py;
+	int	px;
+	int	py;
 
 	px = map->px * PIX / map->reduc;
 	py = map->py * PIX / map->reduc;
@@ -48,7 +29,8 @@ void	color_cube_bonus(t_mlx *mlx, t_map *map, int color)
 	{
 		while (i < px + map->mapS / map->reduc)
 		{
-			if (i == (px + map->mapS / map->reduc) - 1 || (j == (py + map->mapS / map->reduc) -1))
+			if (i == (px + map->mapS / map->reduc) - 1
+				|| (j == (py + map->mapS / map->reduc) - 1))
 				my_mlx_pixel_put(mlx, i, j, BLACK_PIXEL);
 			else
 				my_mlx_pixel_put(mlx, i, j, color);
@@ -59,12 +41,14 @@ void	color_cube_bonus(t_mlx *mlx, t_map *map, int color)
 	}
 }
 
-void	drawMap2D(t_mlx *mlx, t_map *map)
+//DRAWMAP2D: Bonus pour minimap, ici on identifie les murs (=1) en Gray,
+// le sol(=0) en White et le player(N ou S ou E ou W)
+void	drawmap2d(t_mlx *mlx, t_map *map)
 {
 	int	x;
 
 	x = 0;
-	while (x < PIX)
+	while (x < map->mapS)
 	{
 		if (map->map[x] == 1)
 		{
@@ -75,6 +59,11 @@ void	drawMap2D(t_mlx *mlx, t_map *map)
 		{
 			if (get_coord(x, map) == 0)
 				color_cube_bonus(mlx, map, GRAY_PIXEL);
+		}
+		else if (ft_strchr(map->map[x], "NSEW"))
+		{
+			if (get_coord(x, map) == 0)
+				color_cube_bonus(mlx, map, GRAY_PL_PIXEL);
 		}
 		x++;
 	}

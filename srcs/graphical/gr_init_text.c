@@ -35,13 +35,13 @@ int	find_color(t_text *text, char d)
 	// else if (d == 'W')
 	// 	color = find(text->tx, text->ty, text->TW);
 	if (d == 'S')
-		color = ((int *)text->TS->data)[(int)(text->ty) * text->TS->width + (int)(text->tx)];
+		color = ((int *)text->TS->data)[(int)(text->ty * text->TS->height) * text->TS->width + (int)(text->tx * text->TS->width)];
 	else if (d == 'N')
-		color = ((int *)text->TN->data)[(int)(text->ty) * text->TN->width + (int)(text->tx)];
+		color = ((int *)text->TN->data)[(int)(text->ty * text->TN->height) * text->TN->width  + (int)(text->tx * text->TN->width)];
 	else if (d == 'E')
-		color = ((int *)text->TE->data)[(int)(text->ty) * text->TE->width + (int)(text->tx)];
+		color = ((int *)text->TE->data)[(int)(text->ty * text->TE->height) * text->TE->width  + (int)(text->tx * text->TE->width)];
 	else if (d == 'W')
-		color = ((int *)text->TW->data)[(int)(text->ty) * text->TW->width + (int)(text->tx)];
+		color = ((int *)text->TW->data)[(int)(text->ty * text->TW->height) * text->TW->width + (int)(text->tx * text->TW->width)];
 	// else
 	// 	color = BLACK_PIXEL;
 	return (color);
@@ -54,10 +54,22 @@ int	init_texture(t_admin *admin, t_text *text)
 
 	pixH = TEXT_H;
 	pixW = TEXT_W;	
-	text->text_E = "./srcs/textures/texE_bee.xpm";
-	text->text_W = "./srcs/textures/texW_pumpkin.xpm";
-	text->text_N = "./srcs/textures/texN.xpm";
-	text->text_S = "./srcs/textures/texS.xpm";
+	// text->text_E = "./srcs/textures/texE_bee.xpm";
+	// text->text_W = "./srcs/textures/texW_pumpkin.xpm";
+	// text->text_N = "./srcs/textures/texN.xpm";
+	// text->text_S = "./srcs/textures/texS.xpm";
+
+	text->text_E = "./srcs/textures/2048_wood.xpm";
+	text->text_W = "./srcs/textures/2048_damier.xpm";
+	text->text_N = "./srcs/textures/2048_cloud.xpm";
+	text->text_S = "./srcs/textures/2048_clay.xpm";
+
+	// text->text_E = "./srcs/textures/2048_clay.xpm";
+	// text->text_W = "./srcs/textures/2048_damier.xpm";
+	// text->text_N = "./srcs/textures/2048_damier.xpm";
+	// text->text_S = "./srcs/textures/2048_clay.xpm";
+
+
 
 	text->TE = mlx_xpm_file_to_image(admin->mlx->mlx_ptr, text->text_E, &pixW, &pixH);
 	text->TW = mlx_xpm_file_to_image(admin->mlx->mlx_ptr, text->text_W, &pixW, &pixH);

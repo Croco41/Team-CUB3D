@@ -21,14 +21,14 @@ int	mlx_start_init(t_mlx *mlx, t_admin *admin)
 	if (mlx->mlx_win == NULL)
 		return (1);
 	if (init_texture(admin, admin->text))
-		return(ft_close(admin));
+		return (ft_close(admin));
 	mlx->imgame = mlx_new_image(mlx->mlx_ptr, W_WIDTH, W_HEIGHT);
 	if (mlx->imgame == NULL)
 		return (2);
 	mlx_loop_hook(mlx->mlx_ptr, &render, admin);
 	mlx_hook(mlx->mlx_win, KeyPress, KeyPressMask, &key_pressed, admin);
 	mlx_hook(mlx->mlx_win, KeyRelease, KeyReleaseMask, &key_released, admin);
-	mlx_hook(mlx->mlx_win, 17, 1L << 17, ft_close, admin);
+	mlx_hook(mlx->mlx_win, 17, 1L << 17, ft_closeok, admin);
 	mlx_loop(mlx->mlx_ptr);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->imgame);
 	mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_win);
@@ -38,6 +38,8 @@ int	mlx_start_init(t_mlx *mlx, t_admin *admin)
 
 // printf(RED"mlx = %p"RESET"\n", mlx);
 // printf(GREEN"admin->mlx = %p"RESET"\n", &admin->mlx);
-// printf(CYAN"img_width = %d | img_height = %d"RESET"\n", mlx->window->width, mlx->window->height);
-//printf(YELLOW"Mlx_start_init:player->px = %d | player->py = %d | adresse player= %p"RESET"\n", admin->player->px, admin->player->py, admin->player );
+// printf(CYAN"img_width = %d | img_height = %d"RESET"\n", 
+//mlx->window->width, mlx->window->height);
+//printf(YELLOW"Mlx_start_init:player->px = %d | player->py = %d | 
+//adresplayer= %p"RESET"\n",admin->player->px,admin->player->py,admin->player);
 //printf(CYAN"mlx_start_init:adresse mlx= %p"RESET"\n", admin->mlx );
