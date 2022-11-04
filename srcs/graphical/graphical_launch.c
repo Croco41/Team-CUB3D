@@ -30,8 +30,8 @@ int	main(void)
 	init_struct(&admin);
 
 	admin.map->sizeline = 9;
-	admin.map->nbline = 8;
-	admin.map->mapS = admin.map->sizeline * admin.map->nbline;
+	admin.map->nbline = 22;
+	admin.map->mapsur = admin.map->sizeline * admin.map->nbline;
 
 	int map2[] =
 	{
@@ -40,8 +40,22 @@ int	main(void)
 		1,1,1,0,1,1,1,1,' ',
 		1,0,0,0,1,0,0,1,' ',
 		1,0,0,0,0,0,0,1,' ',
+		1,0,0,1,0,1,0,1,' ',
+		1,0,1,0,0,0,0,1,' ',
+		1,0,0,0,0,0,0,1,' ',
+		1,1,1,0,1,1,1,1,' ',
+		1,0,0,0,1,0,0,1,' ',
+		1,0,0,0,0,0,0,1,' ',
 		1,0,0,0,0,1,0,1,' ',
 		1,0,0,0,0,0,0,1,' ',
+		1,0,0,0,0,0,0,1,' ',
+		1,0,0,0,0,0,0,1,' ',
+		1,1,1,0,1,1,1,1,' ',
+		1,0,0,0,1,0,0,1,' ',
+		1,0,0,0,0,0,0,1,' ',
+		1,0,0,0,0,1,0,1,' ',
+		1,0,0,0,0,0,0,1,' ',
+		1,1,1,1,1,1,1,1,' ',
 		1,1,1,1,1,1,1,1,' ',
 	};
 	// int map2[] =
@@ -57,9 +71,12 @@ int	main(void)
 	// };
 	admin.map->map = map2;
 	init_player_position(admin.map, admin.player, admin.rays);
+	size_minimap(admin.map);
 	if (!mlx_start_init(admin.mlx, &admin))
 	{
 		return (1);
 	}
+	// size_minimap(admin.map, admin.mlx);
+	//init_player_position(admin.map, admin.player, admin.rays);
 	return (0);
 }

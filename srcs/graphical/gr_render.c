@@ -80,7 +80,7 @@ void	drawplayer(t_admin *admin, t_mlx *mlx, t_player *player)
 		y++;
 		x = -2;
 	}
-	drawplay_direct(player, admin, player->pa, 30.0); 
+	drawplay_direct(player, admin, player->pa, 30.0);
 }
 //drawRays3D(admin, admin->player, admin->rays, admin->map);
 	//drawRays3DVerti(admin, admin->player, admin->rays, admin->map);

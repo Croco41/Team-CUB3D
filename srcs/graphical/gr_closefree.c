@@ -14,18 +14,16 @@
 
 void	ft_free_all_mlx(t_admin *admin, t_mlx *mlx)
 {
-	if (admin->text->TE)
-		mlx_destroy_image(mlx->mlx_ptr, admin->text->TE);
-	if (admin->text->TW)
-		mlx_destroy_image(mlx->mlx_ptr, admin->text->TW);
-	if (admin->text->TS)
-		mlx_destroy_image(mlx->mlx_ptr, admin->text->TS);
-	if (admin->text->TN)
-		mlx_destroy_image(mlx->mlx_ptr, admin->text->TN);
+	if (admin->text->te)
+		mlx_destroy_image(mlx->mlx_ptr, admin->text->te);
+	if (admin->text->tw)
+		mlx_destroy_image(mlx->mlx_ptr, admin->text->tw);
+	if (admin->text->ts)
+		mlx_destroy_image(mlx->mlx_ptr, admin->text->ts);
+	if (admin->text->tn)
+		mlx_destroy_image(mlx->mlx_ptr, admin->text->tn);
 	if (mlx->imgame)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->imgame);
-	// if (mlx->mlx_win.img)
-	// 	mlx_destroy_image(mlx->mlx_ptr, mlx->mlx_win.img);
 	if (mlx->mlx_win)
 	{
 		mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_win);
@@ -42,8 +40,6 @@ int	ft_close(t_admin *admin)
 {
 	if (admin->mlx->mlx_ptr)
 		ft_free_all_mlx(admin, admin->mlx);
-	// if (admin->map.map)
-	// 	ft_free_map(&admin->map);
 	return (1);
 }
 

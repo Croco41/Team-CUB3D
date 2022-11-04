@@ -17,10 +17,10 @@ void	init_mlx_text(t_admin *admin)
 	admin->mlx->mlx_ptr = NULL;
 	admin->mlx->mlx_win = NULL;
 	admin->mlx->imgame = NULL;
-	admin->text->TE = NULL;
-	admin->text->TW = NULL;
-	admin->text->TS = NULL;
-	admin->text->TN = NULL;
+	admin->text->te = NULL;
+	admin->text->tw = NULL;
+	admin->text->ts = NULL;
+	admin->text->tn = NULL;
 }
 
 void	init_map(t_admin *admin)
@@ -31,7 +31,7 @@ void	init_map(t_admin *admin)
 	admin->map->nbline = 0;
 	admin->map->px = -1;
 	admin->map->py = -1;
-	admin->map->reduc = 1;
+	admin->map->reduc = 3;
 }
 
 void	init_player(t_admin *admin)

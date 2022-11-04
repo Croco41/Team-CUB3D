@@ -12,6 +12,21 @@
 
 #include "cub3d.h"
 
+void	size_minimap(t_map *map)
+{
+	int	sizel;
+	int	sizeh;
+
+	sizel = W_WIDTH * 5 / 100;
+	sizeh = W_HEIGHT * 5 / 100;
+	if (sizel < sizeh)
+		map->reduc = (sizel * 100) / (map->sizeline * PIX);
+	else
+		map->reduc = (sizeh * 100) / (map->nbline * PIX);
+	if (map->reduc % 2 == 1)
+		map->reduc += 1;
+}
+
 //COLOR_CUBE_BONUS: ici on colorie chaque cube avec la couleur donee 
 //dans drawmap2d, avec une ligne de separation en  black pixel entre les cases
 void	color_cube_bonus(t_mlx *mlx, t_map *map, int color)
@@ -25,12 +40,12 @@ void	color_cube_bonus(t_mlx *mlx, t_map *map, int color)
 	py = map->py * PIX / map->reduc;
 	i = px;
 	j = py;
-	while (j < py + map->mapS / map->reduc)
+	while (j < py + map->mapsur / map->reduc)
 	{
-		while (i < px + map->mapS / map->reduc)
+		while (i < px + map->mapsur / map->reduc)
 		{
-			if (i == (px + map->mapS / map->reduc) - 1
-				|| (j == (py + map->mapS / map->reduc) - 1))
+			if (i == (px + map->mapsur / map->reduc) - 1
+				|| (j == (py + map->mapsur / map->reduc) - 1))
 				my_mlx_pixel_put(mlx, i, j, BLACK_PIXEL);
 			else
 				my_mlx_pixel_put(mlx, i, j, color);
@@ -48,7 +63,7 @@ void	drawmap2d(t_mlx *mlx, t_map *map)
 	int	x;
 
 	x = 0;
-	while (x < map->mapS)
+	while (x < map->mapsur)
 	{
 		if (map->map[x] == 1)
 		{

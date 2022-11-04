@@ -21,7 +21,7 @@ void	init_player_position(t_map *map, t_player *player, t_rays *rays)
 		rays->map_dof = map->sizeline;
 	else
 		rays->map_dof = map->nbline;
-	while (p < map->mapS)
+	while (p < map->mapsur)
 	{
 		if (ft_strchr(map->map[p], "NSEW"))
 		{
@@ -39,6 +39,4 @@ void	init_player_position(t_map *map, t_player *player, t_rays *rays)
 		}
 		p++;
 	}
-	player->pdx = cos(player->pa) * 5;
-	player->pdy = sin(player->pa) * 5;
 }

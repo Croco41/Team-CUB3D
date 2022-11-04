@@ -23,7 +23,7 @@ void	rays_distcheck(t_player *player, t_rays *rays, t_map *map, int order)
 		rays->mx = (int)(rays->rx) >> 6;
 		rays->my = (int)(rays->ry) >> 6;
 		rays->mp = rays->my * map->sizeline + rays->mx;
-		if (rays->mp > 0 && rays->mp < map->mapS && map->map[rays->mp] == 1)
+		if (rays->mp > 0 && rays->mp < map->mapsur && map->map[rays->mp] == 1)
 		{
 			get_dist_hv(player, rays, order);
 			rays->dof = rays->map_dof;
@@ -117,8 +117,8 @@ void	drawrays3d(t_admin *admin, t_player *player, t_rays *rays, t_map *map)
 	admin->rays->r = 0;
 	while (rays->r < (W_WIDTH))
 	{
-		rays->distH = 1000000.0;
-		rays->distV = 1000000.0;
+		rays->disth = 1000000.0;
+		rays->distv = 1000000.0;
 		rays->hx = player->px;
 		rays->hy = player->py;
 		rays->vx = player->px;
@@ -127,7 +127,7 @@ void	drawrays3d(t_admin *admin, t_player *player, t_rays *rays, t_map *map)
 		rays_distcheck(player, rays, map, 0);
 		rays_verticalcheck(player, rays);
 		rays_distcheck(player, rays, map, 1);
-		drawline(admin);
+		choosedistfinal(admin);
 		draw_wall(admin, admin->mlx);
 		rays->ra += DR * ((60 / 1500.0));
 		drawrays3d_angle(rays);
