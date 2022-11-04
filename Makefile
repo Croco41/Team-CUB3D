@@ -40,6 +40,7 @@ SRC		=	srcs/graphical/graphical_launch.c \
 			srcs/graphical/gr_init_struct.c \
 			srcs/graphical/gr_3drays_print.c \
 			srcs/graphical/gr_3drays_calcul.c \
+			srcs/graphical/gr_distance.c \
 			srcs/graphical/gr_init_text.c \
 			srcs/graphical/gr_init_player.c \
 			srcs/mainParsing.c \
