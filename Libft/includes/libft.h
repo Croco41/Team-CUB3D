@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebarguil <ebarguil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 15:41:14 by ebarguil          #+#    #+#             */
-/*   Updated: 2022/10/06 20:25:30 by ebarguil         ###   ########.fr       */
+/*   Updated: 2022/11/07 19:28:27 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ typedef struct s_gnl
 char	*gnl(int fd);
 
 /*
+ * === ft_read_file === *
+ */
+
+typedef struct s_rf
+{
+	char		buf[BUFFER_SIZE + 1];
+	int			r;
+	int			l;
+	int			i;
+}	t_rf;
+
+char	**ft_read_file(int fd, int cp);
+
+/*
  * === ft_bzero === *
  */
 
@@ -48,14 +62,16 @@ void	ft_bzero(char *str, int x);
  */
 
 int		ft_strlen(char *s);
-void	ft_strcopy_n(char *src, char dst[BUFFER_SIZE], int n);
-void	ft_strcopy(char *src, char dst[BUFFER_SIZE]);
+char	*ft_strdup_n(char *str, int n);
+char	*ft_strdup(char *str);
 int		ft_contains(char *s, char c);
+char	*ft_strchr(char c, char *set);
 
 /*
  * === ft_ conv === *
  */
 
+int		ft_atoi_c(const char c);
 int		ft_atoi(const char *str);
 
 #endif

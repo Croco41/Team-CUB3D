@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gr_minimap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgranja <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:49:39 by cgranja           #+#    #+#             */
-/*   Updated: 2022/10/10 17:49:44 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 21:32:51 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	size_minimap(t_map *map)
 		map->reduc = (sizeh * 100) / (map->nbline * PIX);
 	if (map->reduc % 2 == 1)
 		map->reduc += 1;
+	map->reduc = 30;
 }
 
 //COLOR_CUBE_BONUS: ici on colorie chaque cube avec la couleur donee 
@@ -40,12 +41,12 @@ void	color_cube_bonus(t_mlx *mlx, t_map *map, int color)
 	py = map->py * PIX / map->reduc;
 	i = px;
 	j = py;
-	while (j < py + map->mapsur / map->reduc)
+	while (j < py + PIX / map->reduc)
 	{
-		while (i < px + map->mapsur / map->reduc)
+		while (i < px + PIX / map->reduc)
 		{
-			if (i == (px + map->mapsur / map->reduc) - 1
-				|| (j == (py + map->mapsur / map->reduc) - 1))
+			if (i == (px + PIX / map->reduc) - 1
+				|| (j == (py + PIX / map->reduc) - 1))
 				my_mlx_pixel_put(mlx, i, j, BLACK_PIXEL);
 			else
 				my_mlx_pixel_put(mlx, i, j, color);

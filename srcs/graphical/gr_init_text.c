@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gr_init_text.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgranja <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 17:45:50 by cgranja           #+#    #+#             */
-/*   Updated: 2022/10/27 17:46:03 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 20:24:53 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,17 @@ int	find_color(t_text *text, char d)
 	// text->text_N = "./srcs/textures/texN.xpm";
 	// text->text_S = "./srcs/textures/texS.xpm";
 
-int	init_texture(t_mlx *mlx, t_text *text)
+int	init_texture(t_mlx *mlx, t_text *text, t_map *map)
 {
 	int	pixh;
 	int	pixw;
 
 	pixh = TEXT_H;
 	pixw = TEXT_W;
-	text->text_e = "./srcs/textures/2048_wood.xpm";
-	text->text_w = "./srcs/textures/teo.xpm";
-	text->text_n = "./srcs/textures/2048_cloud.xpm";
-	text->text_s = "./srcs/textures/2048_clay.xpm";
-	text->te = mlx_xpm_file_to_image(mlx->mlx_ptr, text->text_e, &pixw, &pixh);
-	text->tw = mlx_xpm_file_to_image(mlx->mlx_ptr, text->text_w, &pixw, &pixh);
-	text->ts = mlx_xpm_file_to_image(mlx->mlx_ptr, text->text_s, &pixw, &pixh);
-	text->tn = mlx_xpm_file_to_image(mlx->mlx_ptr, text->text_n, &pixw, &pixh);
+	text->te = mlx_xpm_file_to_image(mlx->mlx_ptr, map->tex_ea, &pixw, &pixh);
+	text->tw = mlx_xpm_file_to_image(mlx->mlx_ptr, map->tex_we, &pixw, &pixh);
+	text->ts = mlx_xpm_file_to_image(mlx->mlx_ptr, map->tex_so, &pixw, &pixh);
+	text->tn = mlx_xpm_file_to_image(mlx->mlx_ptr, map->tex_no, &pixw, &pixh);
 	if (text->te == NULL || text->tw == NULL || text->ts == NULL
 		|| text->tn == NULL)
 		return (1);

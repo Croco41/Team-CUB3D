@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gr_render.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgranja <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 15:47:09 by cgranja           #+#    #+#             */
-/*   Updated: 2022/10/10 15:47:36 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 17:55:53 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	black_image(t_admin *admin)
 	{
 		while (i < W_WIDTH)
 		{
-			my_mlx_pixel_put(admin->mlx, i, j, GRAY_PIXEL);
+			my_mlx_pixel_put(admin->mlx, i, j, admin->map->flo);
 			i++;
 		}
 		j++;

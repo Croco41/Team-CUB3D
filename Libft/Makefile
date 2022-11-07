@@ -26,9 +26,11 @@ SRC		=	srcs/ft_atoi.c \
 			srcs/ft_bzero.c \
 			srcs/ft_contains.c \
 			srcs/ft_gnl.c \
-			srcs/ft_strcopy_n.c \
-			srcs/ft_strcopy.c \
+			srcs/ft_strdup_n.c \
+			srcs/ft_strdup.c \
 			srcs/ft_strlen.c \
+			srcs/ft_strchr.c \
+			srcs/ft_read_file.c \
 
 OBJ		=	$(SRC:srcs/%.c=objs/%.o)
 DEP		=	$(SRC:srcs/%.c=objs/%.d)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgranja <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 12:50:54 by cgranja           #+#    #+#             */
-/*   Updated: 2022/10/28 12:50:56 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 19:36:52 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(char c, char *set)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (set && set[++i])
