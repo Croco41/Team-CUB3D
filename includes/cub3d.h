@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgranja <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:40:30 by cgranja           #+#    #+#             */
-/*   Updated: 2022/10/30 17:40:34 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 21:48:18 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@
 # define TEXT_H 64
 # define TEXT_W 64
 
+//double	rx; //coordonnee x de l'impact du rayon sur une intersection
+//double	ra; //angle du rayon
 typedef struct s_rays
 {
 	int		r;
@@ -55,9 +57,9 @@ typedef struct s_rays
 	int		mp;
 	int		dof;
 	int		map_dof;
-	double	rx; //coordonnee x de l'impact du rayon sur une intersection
+	double	rx;
 	double	ry;
-	double	ra; //angle du rayon
+	double	ra;
 	double	xo;
 	double	yo;
 	double	disth;
@@ -79,6 +81,8 @@ typedef struct s_mlx
 	t_img		*imgame;
 }				t_mlx;
 
+//double		pdx; //deltax pour la rota player
+//double		pa; //angle of the player en radians
 typedef struct s_player
 {
 	int			key_r;
@@ -92,25 +96,25 @@ typedef struct s_player
 	int			py;
 	int			x;
 	int			y;
-	double		pdx; //deltax pour la rota player
+	double		pdx;
 	double		pdy;
-	double		pa; //angle of the player en radians
+	double		pa;
 	char		text;
 }				t_player;
 
-typedef struct s_text
-{
-	char		*text_n;
-	char		*text_s;
-	char		*text_e;
-	char		*text_w;
-	t_img		*te;
-	t_img		*tw;
-	t_img		*ts;
-	t_img		*tn;
-	float		tx;
-	float		ty;
-}				t_text;
+// typedef struct s_text
+// {
+// 	char		*text_n;
+// 	char		*text_s;
+// 	char		*text_e;
+// 	char		*text_w;
+// 	t_img		*te;
+// 	t_img		*tw;
+// 	t_img		*ts;
+// 	t_img		*tn;
+// 	float		tx;
+// 	float		ty;
+// }				t_text;
 
 typedef struct s_map
 {
@@ -122,15 +126,27 @@ typedef struct s_map
 	int			mapsur;
 	int			other;
 	int			error;
-	char		name[BUFFER_SIZE];
-	char		tex_no[BUFFER_SIZE];
-	char		tex_so[BUFFER_SIZE];
-	char		tex_we[BUFFER_SIZE];
-	char		tex_ea[BUFFER_SIZE];
 	int			flo;
 	int			cel;
 	int			fd;
 	int			reduc;
+	bool		map_ok;
+	char		**om;
+	char		*name;
+	char		*tex_no;
+	char		*tex_so;
+	char		*tex_we;
+	char		*tex_ea;
+	char		*text_n;
+	char		*text_s;
+	char		*text_e;
+	char		*text_w;
+	t_img		*te;
+	t_img		*tw;
+	t_img		*ts;
+	t_img		*tn;
+	float		tx;
+	float		ty;
 }				t_map;
 
 typedef struct s_admin
@@ -139,7 +155,6 @@ typedef struct s_admin
 	t_mlx		*mlx;
 	t_player	*player;
 	t_rays		*rays;
-	t_text		*text;
 }				t_admin;
 
 /*--------------------GRAPHICAL PART----------------------*/
@@ -153,7 +168,7 @@ int		render(t_admin *admin);
 
 //--rendu affichage texture -- //
 
-int		find_color(t_text *text, char d);
+int		find_color(t_map *map, char d);
 void	choose_text(t_admin *admin, t_rays *rays);
 
 //--rendu affichage minimap----//
@@ -195,10 +210,9 @@ int		get_coord(int x, t_map *map);
 
 //--launch-----//
 
-int		main(void);
 void	init_struct(t_admin *admin);
 int		mlx_start_init(t_mlx *mlx, t_admin *admin);
-int		init_texture(t_mlx *mlx, t_text *text);
+int		init_texture(t_mlx *mlx, t_map *map);
 void	init_player_position(t_map *map, t_player *player, t_rays *rays);
 
 //--close------//
@@ -211,20 +225,26 @@ int		ft_close(t_admin *admin);
 */
 
 /*
- * === ft_error === *
+ * === utils === *
  */
 
 int		ft_error_int(char *e, int x);
+int		ft_warning_int(char *w, char *l, int x);
+int		ft_strlen_nos(char *s);
+void	ft_free_pars(t_map *map);
 
 /*
  * === parsing === *
  */
 
-int		ft_check_elems(t_map *map);
 int		ft_check_name(t_map *map);
 int		ft_fill_col(char *l, int end, int r, int i);
 bool	ft_isdigit_cub(char *s, int n);
 int		ft_parsing(t_map *map, char *str);
+int		ft_read_data(t_map *map, char **data);
+int		ft_retouch(t_map *map);
 void	ft_save_elems(t_map *map, char *l);
+int		ft_save_map(t_map *map);
+bool	ft_verify_close_map(t_map *map);
 
 #endif /* !CUB3D_H */

@@ -6,7 +6,7 @@
 /*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:47:30 by cgranja           #+#    #+#             */
-/*   Updated: 2022/11/07 17:56:55 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 21:49:51 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ void	draw_good_wall(t_admin *admin, t_rays *rays)
 {
 	if (admin->player->text == 'S' || admin->player->text == 'N')
 	{
-		admin->text->tx = (rays->rx / PIX) - (int)((rays->rx / PIX));
+		admin->map->tx = (rays->rx / PIX) - (int)((rays->rx / PIX));
 		if (rays->ra < PI)
-			admin->text->tx = 1 - admin->text->tx;
+			admin->map->tx = 1 - admin->map->tx;
 	}
 	else
 	{
-		admin->text->tx = (rays->ry / PIX) - (int)((rays->ry / PIX));
+		admin->map->tx = (rays->ry / PIX) - (int)((rays->ry / PIX));
 		if (rays->ra > (PI / 2) && rays->ra < (3 * (PI / 2)))
-			admin->text->tx = 1 - admin->text->tx;
+			admin->map->tx = 1 - admin->map->tx;
 	}
 }
 
@@ -76,8 +76,8 @@ void	draw_wall(t_admin *admin, t_mlx *mlx)
 	draw_good_wall(admin, admin->rays);
 	while (baseline < stopline && baseline < mlx->imgame->height)
 	{
-		admin->text->ty = (baseline - case_off) / lineh;
-		color = find_color(admin->text, admin->player->text);
+		admin->map->ty = (baseline - case_off) / lineh;
+		color = find_color(admin->map, admin->player->text);
 		my_mlx_pixel_put(mlx, admin->rays->r, baseline, color);
 		baseline++;
 	}

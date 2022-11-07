@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gr_closefree.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgranja <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 15:41:29 by cgranja           #+#    #+#             */
-/*   Updated: 2022/10/11 15:41:33 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 21:47:43 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_free_all_mlx(t_admin *admin, t_mlx *mlx)
 {
-	if (admin->text->te)
-		mlx_destroy_image(mlx->mlx_ptr, admin->text->te);
-	if (admin->text->tw)
-		mlx_destroy_image(mlx->mlx_ptr, admin->text->tw);
-	if (admin->text->ts)
-		mlx_destroy_image(mlx->mlx_ptr, admin->text->ts);
-	if (admin->text->tn)
-		mlx_destroy_image(mlx->mlx_ptr, admin->text->tn);
+	if (admin->map->te)
+		mlx_destroy_image(mlx->mlx_ptr, admin->map->te);
+	if (admin->map->tw)
+		mlx_destroy_image(mlx->mlx_ptr, admin->map->tw);
+	if (admin->map->ts)
+		mlx_destroy_image(mlx->mlx_ptr, admin->map->ts);
+	if (admin->map->tn)
+		mlx_destroy_image(mlx->mlx_ptr, admin->map->tn);
 	if (mlx->imgame)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->imgame);
 	if (mlx->mlx_win)

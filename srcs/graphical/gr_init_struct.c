@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gr_init_struct.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgranja <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 15:22:27 by cgranja           #+#    #+#             */
-/*   Updated: 2022/10/10 15:22:33 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 21:47:43 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	init_mlx_text(t_admin *admin)
 	admin->mlx->mlx_ptr = NULL;
 	admin->mlx->mlx_win = NULL;
 	admin->mlx->imgame = NULL;
-	admin->text->te = NULL;
-	admin->text->tw = NULL;
-	admin->text->ts = NULL;
-	admin->text->tn = NULL;
+	admin->map->te = NULL;
+	admin->map->tw = NULL;
+	admin->map->ts = NULL;
+	admin->map->tn = NULL;
 }
 
 void	init_map(t_admin *admin)

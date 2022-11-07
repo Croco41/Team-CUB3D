@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gr_mlx_start.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgranja <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 15:37:10 by cgranja           #+#    #+#             */
-/*   Updated: 2022/10/10 15:37:22 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 21:49:21 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	mlx_start_init(t_mlx *mlx, t_admin *admin)
 	mlx->mlx_win = mlx_new_window(mlx->mlx_ptr, W_WIDTH, W_HEIGHT, "CUB3D");
 	if (mlx->mlx_win == NULL)
 		return (1);
-	if (init_texture(mlx, admin->text, admin->map))
+	if (init_texture(mlx, admin->map))
 		return (ft_close(admin));
 	mlx->imgame = mlx_new_image(mlx->mlx_ptr, W_WIDTH, W_HEIGHT);
 	if (mlx->imgame == NULL)

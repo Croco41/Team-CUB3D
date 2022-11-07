@@ -6,7 +6,7 @@
 /*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:56:06 by ebarguil          #+#    #+#             */
-/*   Updated: 2022/11/07 21:27:36 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 21:52:23 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,17 @@ t_map	*link_admin_text(void)
 
 int	main(int ac, char **av)
 {
-	t_admin admin;
+	t_admin		admin;
 	t_mlx		mlx;
 	t_player	player;
 	t_rays		rays;
-	t_text		text;
 	t_map		map;
-	
 
 	admin.mlx = &mlx;
 	admin.player = &player;
 	admin.rays = &rays;
-	admin.text = &text;
 	admin.map = &map;
-
-	//admin.map = malloc(sizeof(t_map *) * 1);
-	//admin.map = link_admin_text();
 	init_struct(&admin);
-
 	if (BUFFER_SIZE != 1024)
 		return (ft_error_int("libft.h => BUFFER_SIZE must be 1024", 1));
 	ac--;
@@ -51,9 +44,7 @@ int	main(int ac, char **av)
 	init_player_position(admin.map, admin.player, admin.rays);
 	size_minimap(admin.map);
 	if (!mlx_start_init(admin.mlx, &admin))
-	{
 		return (ft_free_pars(admin.map), 1);
-	}
 	return (ft_free_pars(admin.map), 0);
 }
 
