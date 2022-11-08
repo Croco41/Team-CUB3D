@@ -6,17 +6,14 @@
 /*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 13:59:34 by cgranja           #+#    #+#             */
-/*   Updated: 2022/11/07 19:31:49 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/08 16:47:56 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_player_position(t_map *map, t_player *player, t_rays *rays)
+void	init_player_position(t_map *map, t_player *player, t_rays *rays, int p)
 {
-	int	p;
-
-	p = 0;
 	if (map->sizeline > map->nbline)
 		rays->map_dof = map->sizeline;
 	else
@@ -39,4 +36,6 @@ void	init_player_position(t_map *map, t_player *player, t_rays *rays)
 		}
 		p++;
 	}
+	player->pdx = cos(player->pa) * 5;
+	player->pdy = sin(player->pa) * 5;
 }

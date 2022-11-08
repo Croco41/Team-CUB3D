@@ -6,7 +6,7 @@
 /*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:47:30 by cgranja           #+#    #+#             */
-/*   Updated: 2022/11/07 21:49:51 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 22:28:58 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void	draw_floor(t_admin *admin)
 	int	j;
 
 	j = admin->mlx->imgame->height / 2;
-	i = 0;
-	while (j > 0)
+	i = -1;
+	while (j >= 0)
 	{
 		while (++i < admin->mlx->imgame->width)
 		{
 			my_mlx_pixel_put(admin->mlx, i, j, admin->map->cel);
 		}
 		j--;
-		i = 0;
+		i = -1;
 	}
 }
 

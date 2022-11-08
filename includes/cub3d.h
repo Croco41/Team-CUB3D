@@ -6,7 +6,7 @@
 /*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:40:30 by cgranja           #+#    #+#             */
-/*   Updated: 2022/11/07 21:48:18 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/08 16:48:30 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ typedef struct s_player
 	int			key_s;
 	int			key_fr;
 	int			key_fl;
-	int			move;
 	int			px;
 	int			py;
 	int			x;
@@ -101,20 +100,6 @@ typedef struct s_player
 	double		pa;
 	char		text;
 }				t_player;
-
-// typedef struct s_text
-// {
-// 	char		*text_n;
-// 	char		*text_s;
-// 	char		*text_e;
-// 	char		*text_w;
-// 	t_img		*te;
-// 	t_img		*tw;
-// 	t_img		*ts;
-// 	t_img		*tn;
-// 	float		tx;
-// 	float		ty;
-// }				t_text;
 
 typedef struct s_map
 {
@@ -137,10 +122,6 @@ typedef struct s_map
 	char		*tex_so;
 	char		*tex_we;
 	char		*tex_ea;
-	char		*text_n;
-	char		*text_s;
-	char		*text_e;
-	char		*text_w;
 	t_img		*te;
 	t_img		*tw;
 	t_img		*ts;
@@ -213,7 +194,7 @@ int		get_coord(int x, t_map *map);
 void	init_struct(t_admin *admin);
 int		mlx_start_init(t_mlx *mlx, t_admin *admin);
 int		init_texture(t_mlx *mlx, t_map *map);
-void	init_player_position(t_map *map, t_player *player, t_rays *rays);
+void	init_player_position(t_map *map, t_player *player, t_rays *rays, int p);
 
 //--close------//
 

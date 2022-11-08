@@ -6,7 +6,7 @@
 /*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 15:41:29 by cgranja           #+#    #+#             */
-/*   Updated: 2022/11/07 21:47:43 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/08 16:19:21 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,17 @@ void	ft_free_all_mlx(t_admin *admin, t_mlx *mlx)
 	if (mlx->imgame)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->imgame);
 	if (mlx->mlx_win)
-	{
 		mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_win);
-		mlx->mlx_ptr = NULL;
-	}
 	if (mlx->mlx_ptr)
-	{
 		mlx_destroy_display(mlx->mlx_ptr);
-		free(mlx->mlx_ptr);
-	}
+	free(mlx->mlx_ptr);
 }
 
 int	ft_close(t_admin *admin)
 {
 	if (admin->mlx->mlx_ptr)
 		ft_free_all_mlx(admin, admin->mlx);
+	ft_free_pars(admin->map);
 	return (1);
 }
 

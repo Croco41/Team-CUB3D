@@ -6,7 +6,7 @@
 /*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:49:39 by cgranja           #+#    #+#             */
-/*   Updated: 2022/11/07 21:32:51 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/08 15:52:04 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ void	size_minimap(t_map *map)
 	int	sizel;
 	int	sizeh;
 
-	sizel = W_WIDTH * 5 / 100;
-	sizeh = W_HEIGHT * 5 / 100;
-	if (sizel < sizeh)
-		map->reduc = (sizel * 100) / (map->sizeline * PIX);
-	else
-		map->reduc = (sizeh * 100) / (map->nbline * PIX);
-	if (map->reduc % 2 == 1)
-		map->reduc += 1;
-	map->reduc = 30;
+	sizel = map->sizeline * PIX;
+	sizeh = map->nbline * PIX;
+	while (sizel > (W_WIDTH / 2) || sizeh > (W_HEIGHT / 2))
+	{
+		if (sizel > W_WIDTH * 3 || sizeh > W_HEIGHT * 3)
+			map->reduc += 6;
+		else
+			map->reduc += 2;
+		sizel = sizel / 2;
+		sizeh = sizeh / 2;
+	}
 }
 
 //COLOR_CUBE_BONUS: ici on colorie chaque cube avec la couleur donee 

@@ -6,7 +6,7 @@
 /*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 15:22:27 by cgranja           #+#    #+#             */
-/*   Updated: 2022/11/07 21:47:43 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/08 16:31:28 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_map(t_admin *admin)
 	admin->map->nbline = 0;
 	admin->map->px = -1;
 	admin->map->py = -1;
-	admin->map->reduc = 3;
+	admin->map->reduc = 2;
 }
 
 void	init_player(t_admin *admin)
@@ -40,7 +40,6 @@ void	init_player(t_admin *admin)
 	admin->player->key_l = 0;
 	admin->player->key_w = 0;
 	admin->player->key_s = 0;
-	admin->player->move = 0;
 	admin->player->key_fr = 0;
 	admin->player->key_fl = 0;
 	admin->player->x = 0;

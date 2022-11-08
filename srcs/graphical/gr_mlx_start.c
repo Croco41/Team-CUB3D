@@ -6,7 +6,7 @@
 /*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 15:37:10 by cgranja           #+#    #+#             */
-/*   Updated: 2022/11/07 21:49:21 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/08 16:19:55 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	mlx_start_init(t_mlx *mlx, t_admin *admin)
 {
 	mlx->mlx_ptr = mlx_init();
-	if (!mlx->mlx_ptr)
+	if (mlx->mlx_ptr == NULL)
 		return (1);
 	mlx->mlx_win = mlx_new_window(mlx->mlx_ptr, W_WIDTH, W_HEIGHT, "CUB3D");
 	if (mlx->mlx_win == NULL)
@@ -24,15 +24,13 @@ int	mlx_start_init(t_mlx *mlx, t_admin *admin)
 		return (ft_close(admin));
 	mlx->imgame = mlx_new_image(mlx->mlx_ptr, W_WIDTH, W_HEIGHT);
 	if (mlx->imgame == NULL)
-		return (2);
+		return (1);
 	mlx_loop_hook(mlx->mlx_ptr, &render, admin);
 	mlx_hook(mlx->mlx_win, KeyPress, KeyPressMask, &key_pressed, admin);
 	mlx_hook(mlx->mlx_win, KeyRelease, KeyReleaseMask, &key_released, admin);
 	mlx_hook(mlx->mlx_win, 17, 1L << 17, ft_closeok, admin);
 	mlx_loop(mlx->mlx_ptr);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->imgame);
-	mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_win);
-	mlx_destroy_display(mlx->mlx_ptr);
+	ft_closeok(admin);
 	return (0);
 }
 

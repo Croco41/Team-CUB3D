@@ -6,19 +6,11 @@
 /*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:56:06 by ebarguil          #+#    #+#             */
-/*   Updated: 2022/11/07 21:52:23 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/08 16:48:09 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_map	*link_admin_text(void)
-{
-	t_map	*map;
-
-	map = malloc(sizeof(t_map *) * 1);
-	return (map);
-}
 
 int	main(int ac, char **av)
 {
@@ -41,11 +33,11 @@ int	main(int ac, char **av)
 	if (ft_parsing(admin.map, av[1]))
 		return (ft_free_pars(admin.map), 1);
 	admin.map->mapsur = admin.map->sizeline * admin.map->nbline;
-	init_player_position(admin.map, admin.player, admin.rays);
+	init_player_position(admin.map, admin.player, admin.rays, 0);
 	size_minimap(admin.map);
-	if (!mlx_start_init(admin.mlx, &admin))
-		return (ft_free_pars(admin.map), 1);
-	return (ft_free_pars(admin.map), 0);
+	if (mlx_start_init(admin.mlx, &admin) == 1)
+		return (ft_close(&admin), ft_error_int("Error with mlx start", 1));
+	return (ft_closeok(&admin), 0);
 }
 
 /*
