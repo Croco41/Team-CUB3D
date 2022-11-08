@@ -1,0 +1,7 @@
+NO ./srcs/textures/teo.xpm
+SO ./srcs/textures/texS.xpm
+WE ./srcs/textures/texW_pumpkin.xpm
+EA ./srcs/textures/texE_bee.xpm
+
+F 220,100,0
+C 225,30,0
