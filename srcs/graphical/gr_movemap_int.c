@@ -34,7 +34,7 @@ int	get_int(int x, int y, t_map *map)
 //les enregistre dans px, py(posiion player)
 int	get_coord(int x, t_map *map)
 {
-	if (x < 0 || x > map->mapS)
+	if (x < 0 || x > map->mapsur)
 	{
 		map->px = -1;
 		map->py = -1;
@@ -46,7 +46,7 @@ int	get_coord(int x, t_map *map)
 		map->px = x;
 		map->py = 0;
 	}
-	else if (x >= map->sizeline && x < map->mapS)
+	else if (x >= map->sizeline && x < map->mapsur)
 	{
 		map->py = x / map->sizeline;
 		map->px = x - (map->py * map->sizeline);

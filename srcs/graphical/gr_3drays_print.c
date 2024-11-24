@@ -3,162 +3,121 @@
 /*                                                        :::      ::::::::   */
 /*   gr_3drays_print.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgranja <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:47:30 by cgranja           #+#    #+#             */
-/*   Updated: 2022/10/10 17:47:33 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/07 22:28:58 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	get_dist(double px, double py, double hvx, double hvy)
+void	fix_fisheye(t_admin *admin)
 {
-	//return (sqrt((hx - px) * (hx - px) + (hy - py) * (hy - py)));
-	return (sqrt((hvx - px) * (hvx - px) + (hvy - py) * (hvy - py)));
-}
+	float	ca;
 
-void	fix_fisheye(t_admin *admin, double dist)
-{
-	double ca;
-
-	ca = admin->player->pa  - admin->rays->ra + PI;
+	ca = admin->player->pa - admin->rays->ra + PI;
 	if (ca < 0)
-		ca += 2*PI;
-	else if (ca > 2*PI)
-		ca -= 2*PI;
-	admin->rays->distF = dist * cos(ca);
+		ca += 2 * PI;
+	else if (ca > 2 * PI)
+		ca -= 2 * PI;
+	admin->rays->distfin = fabs(admin->rays->distfin * cos(ca));
 }
 
-void draw_floor(t_admin *admin)
+void	draw_floor(t_admin *admin)
 {
-	int	i; 
+	int	i;
 	int	j;
 
-	j = W_HEIGHT / 2;
-	i = W_WIDTH / 2 + 1;
-	while (j > 0)
+	j = admin->mlx->imgame->height / 2;
+	i = -1;
+	while (j >= 0)
 	{
-		while (i < W_WIDTH)
+		while (++i < admin->mlx->imgame->width)
 		{
-			my_mlx_pixel_put(admin->mlx, i, j, CYAN_PIXEL);
-			i++;
+			my_mlx_pixel_put(admin->mlx, i, j, admin->map->cel);
 		}
 		j--;
-		i = W_WIDTH / 2 + 1;;
+		i = -1;
 	}
 }
 
-void 	draw_Wall(t_admin *admin, t_map *map, t_mlx *mlx, double dist)
+void	draw_good_wall(t_admin *admin, t_rays *rays)
 {
-	int lineH;
-	int baseline;
-	int stopline;
-	//float text;
-	
-	if (dist < 1)
-		dist = 1;
-	fix_fisheye(admin, dist);
-	//printf(YELLOW" dist = %f "RESET"\n", dist);
-	lineH = ((map->mapS * mlx->imgame->height) / ((int)dist));
-	//printf(GREEN" dist = %f | lineH = %d "RESET"\n", dist, lineH);
-	//printf(GREEN" dist = %f | lineH = %d | mlx->height = %d "RESET"\n", dist, lineH, mlx->height);
-	// if (lineH > mlx->imgame->height)
-	// 	lineH = mlx->imgame->height;
-	baseline = (mlx->imgame->height / 2) - (lineH / 2);
-	//stopline = (mlx->imgame->height / 2) + (lineH / 2);
+	if (admin->player->text == 'S' || admin->player->text == 'N')
+	{
+		admin->map->tx = (rays->rx / PIX) - (int)((rays->rx / PIX));
+		if (rays->ra < PI)
+			admin->map->tx = 1 - admin->map->tx;
+	}
+	else
+	{
+		admin->map->tx = (rays->ry / PIX) - (int)((rays->ry / PIX));
+		if (rays->ra > (PI / 2) && rays->ra < (3 * (PI / 2)))
+			admin->map->tx = 1 - admin->map->tx;
+	}
+}
+
+void	draw_wall(t_admin *admin, t_mlx *mlx)
+{
+	int		lineh;
+	int		baseline;
+	int		stopline;
+	int		color;
+	float	case_off;
+
+	fix_fisheye(admin);
+	lineh = ((PIX * mlx->imgame->height) / (admin->rays->distfin));
+	baseline = (mlx->imgame->height / 2) - (lineh / 2);
+	stopline = lineh + baseline;
+	case_off = baseline;
 	if (baseline < 0)
 		baseline = 0;
-	stopline = lineH + baseline;
-	//printf(RED"baseline = %d | stopline = %d | lineH = %d | mlx->height = %d "RESET"\n", baseline, stopline, lineH, mlx->height);
-	// printf(RED" mlx->imgame->height = %d "RESET"\n", mlx->imgame->height);
-	// printf(YELLOW" dist = %f | lineH = %d "RESET"\n", dist, lineH);
-	while (baseline < stopline && baseline < W_HEIGHT)
+	draw_good_wall(admin, admin->rays);
+	while (baseline < stopline && baseline < mlx->imgame->height)
 	{
-				if (admin->rays->distV < admin->rays->distH)
-				{
-					my_mlx_pixel_put(mlx, admin->rays->r + 512, baseline, FGREEN_PIXEL);
-					//printf(GREEN" dist = %f | lineH = %d "RESET"\n", dist, lineH);
-				}
-				else
-				{
-					my_mlx_pixel_put(mlx, admin->rays->r + 512, baseline, GREEN_PIXEL);
-					//printf(YELLOW" dist = %f | lineH = %d "RESET"\n", dist, lineH);			
-				}
-			//my_mlx_pixel_put(mlx, dist, admin->player->py, GREEN_PIXEL);
-				 //my_mlx_pixel_put(mlx, admin->rays->r + x + 530, baseline/2, GREEN_PIXEL);
-			//printf("pixelput \n");
-			baseline++;
+		admin->map->ty = (baseline - case_off) / lineh;
+		color = find_color(admin->map, admin->player->text);
+		my_mlx_pixel_put(mlx, admin->rays->r, baseline, color);
+		baseline++;
 	}
 }
 
-void	choise_Text(t_admin *admin, t_rays *rays)
+void	choose_text(t_admin *admin, t_rays *rays)
 {
-	if (rays->distV < rays->distH)
+	if (rays->distv < rays->disth)
 	{
 		if (rays->ra <= (PI / 2) || rays->ra > (3 * (PI / 2)))
-		{
-			rays->color = CYAN_PIXEL;
-			admin->player->text = 'W'; // West texture			
-		}
+			admin->player->text = 'E';
 		if (rays->ra > (PI / 2) && rays->ra <= (3 * (PI / 2)))
-		{
-			rays->color = YELLOW_PIXEL;
-			admin->player->text = 'E'; // East texture
-		}
+			admin->player->text = 'W';
 	}
 	else
 	{
 		if (rays->ra >= 0 && rays->ra < PI)
-		{
-			rays->color = WHITE_PIXEL;
-			admin->player->text = 'S'; // South texture			
-		}
+			admin->player->text = 'S';
 		if (rays->ra >= PI && rays->ra < (2 * PI))
-		{
-			rays->color = GREEN_PIXEL;
-			admin->player->text = 'N'; // North texture
-		}
+			admin->player->text = 'N';
 	}
 }
 
-void	drawLine(t_admin *admin, t_mlx *mlx)
-{
-//printf(GREEN"player->px = %d | player->py = %d | adresse player= %p"RESET"\n", admin->player->px, admin->player->py, admin->player );
-	double	x;
-	double	dist;
-	double	finalx;
-	double	finaly;
+// void	choosedistfinal(t_admin *admin)
+// {
+// 	double	x;
 
-	x = 0;
-	if (admin->rays->distV < admin->rays->distH)
-	{
-		admin->rays->rx = admin->rays->vx;
-		admin->rays->ry = admin->rays->vy;
-	}
-	else if (admin->rays->distH < admin->rays->distV)
-	{
-		admin->rays->rx = admin->rays->hx;
-		admin->rays->ry = admin->rays->hy;
-	}
-	dist = sqrt((admin->rays->rx - admin->player->px) * (admin->rays->rx - admin->player->px) + (admin->rays->ry - admin->player->py) * (admin->rays->ry - admin->player->py));
-	admin->rays->distF = dist;
-	choise_Text(admin, admin->rays);
-	while (x < 100)
-	{
-		// dist = admin->player->px + (cos(admin->rays->ra) * x * (admin->rays->rx /100));
-		finalx = admin->player->px + (cos(admin->rays->ra) * x * (dist / 100));
-		finaly = admin->player->py + (sin(admin->rays->ra) * x * (dist / 100));
-		//my_mlx_pixel_put(mlx, admin->player->px + admin->player->pdx*x , admin->player->py + admin->player->pdy*x, GREEN_PIXEL);
-		// my_mlx_pixel_put(mlx, admin->player->px + admin->rays->rx*x , admin->player->py + admin->rays->ry*x, GREEN_PIXEL);
-		if (admin->player->px < admin->map->sizeline * 64 && admin->player->py < admin->map->nbline * 64)
-		{
-			//my_mlx_pixel_put(mlx, dist, admin->player->py, GREEN_PIXEL);
-			// if (admin->rays->distV < admin->rays->distH)
-			// 	my_mlx_pixel_put(mlx, finalx, finaly, FGREEN_PIXEL);
-			// else
-				my_mlx_pixel_put(mlx, finalx, finaly, admin->rays->color);
-		}	
-		x++;
-	}
-}
+// 	x = 0;
+// 	admin->rays->distfin = 0;
+// 	if (admin->rays->distv < admin->rays->disth)
+// 	{
+// 		admin->rays->rx = admin->rays->vx;
+// 		admin->rays->ry = admin->rays->vy;
+// 		admin->rays->distfin = admin->rays->distv;
+// 	}
+// 	else if (admin->rays->disth <= admin->rays->distv)
+// 	{
+// 		admin->rays->rx = admin->rays->hx;
+// 		admin->rays->ry = admin->rays->hy;
+// 		admin->rays->distfin = admin->rays->disth;
+// 	}
+// 	choose_text(admin, admin->rays);
+// }

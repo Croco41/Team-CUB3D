@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gr_readkey.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgranja <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 17:41:13 by cgranja           #+#    #+#             */
-/*   Updated: 2022/10/10 17:41:24 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/08 16:28:44 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void	use_key(t_admin *admin)
 {
-	if (admin->player->key_fl == 1)
-		turn_left(admin->player);
-	if (admin->player->key_fr == 1)
-		turn_right(admin->player);
 	if (admin->player->key_l == 1)
 		move_left(admin->map, admin->player);
 	if (admin->player->key_r == 1)
@@ -26,6 +22,10 @@ void	use_key(t_admin *admin)
 		move_up(admin->map, admin->player);
 	if (admin->player->key_s == 1)
 		move_down(admin->map, admin->player);
+	if (admin->player->key_fl == 1)
+		turn_left(admin->player);
+	if (admin->player->key_fr == 1)
+		turn_right(admin->player);
 }
 
 int	key_released(int keycode, t_admin *admin)

@@ -1,0 +1,19 @@
+NO ./srcs/textures/teo.xpm
+SO ./srcs/textures/texS.xpm
+WE ./srcs/textures/texW_pumpkin.xpm
+EA ./srcs/textures/texE_bee.xpm
+
+F  187,185,13   
+C  234,91,227 
+
+ 111111
+110N0011
+ 1000001
+ 1000011
+ 1000001    
+ 1000001
+ 10010011
+ 1000001    
+ 1000001  
+ 1111111
+ 11 11

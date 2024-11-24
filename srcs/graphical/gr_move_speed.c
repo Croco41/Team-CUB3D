@@ -12,14 +12,7 @@
 
 #include "cub3d.h"
 
-
-// void display_frame()
-// {
-
-// }
-
 //fonctions pour tourner(orientation du player) avec les touches a et d
-
 void	turn_right(t_player *player)
 {
 	player->pa += 0.1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fill_col.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebarguil <ebarguil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 20:59:18 by ebarguil          #+#    #+#             */
-/*   Updated: 2022/10/06 21:00:16 by ebarguil         ###   ########.fr       */
+/*   Updated: 2022/11/07 18:27:31 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,16 @@ int	ft_fill_col(char *l, int end, int r, int i)
 {
 	char	buf[BUFFER_SIZE];
 	int		rgb[3];
+	int		b;
 
 	while (l[++i] && i < end)
 	{
 		if (l[i] == ',')
 			continue ;
 		ft_bzero(buf, BUFFER_SIZE);
+		b = 0;
 		while (l[i] && l[i] != ',' && i < end)
-		{
-			buf[i] = l[i];
-			i++;
-		}
+			buf[b++] = l[i++];
 		if (!l[i])
 			i--;
 		if (r == 2)

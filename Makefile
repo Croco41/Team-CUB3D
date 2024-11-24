@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ebarguil <ebarguil@student.42.fr>          +#+  +:+       +#+         #
+#    By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/30 15:01:01 by ebarguil          #+#    #+#              #
-#    Updated: 2022/10/06 21:00:12 by ebarguil         ###   ########.fr        #
+#    Updated: 2022/11/08 16:54:40 by cgranja          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,7 @@ vpath %.c srcs/graphical
 
 #dans SRC pensez a mute le main G(graphical_launch.c) ou P(main.c) selon les besoins
 
-SRC		=	srcs/graphical/graphical_launch.c \
-			srcs/graphical/gr_closefree.c \
+SRC		=	srcs/graphical/gr_closefree.c \
 			srcs/graphical/gr_render.c \
 			srcs/graphical/gr_readkey.c \
 			srcs/graphical/gr_movekey.c \
@@ -40,18 +39,28 @@ SRC		=	srcs/graphical/graphical_launch.c \
 			srcs/graphical/gr_init_struct.c \
 			srcs/graphical/gr_3drays_print.c \
 			srcs/graphical/gr_3drays_calcul.c \
-			srcs/mainParsing.c \
-			srcs/parsing/ft_check_elems.c \
+			srcs/graphical/gr_distance.c \
+			srcs/graphical/gr_init_text.c \
+			srcs/graphical/gr_init_player.c \
+			srcs/main.c \
 			srcs/parsing/ft_check_name.c \
 			srcs/parsing/ft_fill_col.c \
 			srcs/parsing/ft_isdigit_cub.c \
 			srcs/parsing/ft_parsing.c \
+			srcs/parsing/ft_read_data.c \
+			srcs/parsing/ft_retouch.c \
 			srcs/parsing/ft_save_elems.c \
+			srcs/parsing/ft_save_map.c \
+			srcs/parsing/ft_verify_close_map.c \
+			srcs/parsing/utils.c \
+		
 
 OBJ		=	$(SRC:srcs/%.c=objs/%.o)
 DEP		=	$(SRC:srcs/%.c=objs/%.d)
 
 all			:	libft obj $(NAME)
+
+bonus		:	libft obj $(NAME)
 
 libft		:
 				$(MAKE) -C Libft
@@ -106,4 +115,13 @@ fsa			:	fclean obj $(OBJ)
 
 re			:	fclean all
 
-.PHONY		:	all clean fclean re
+n			:
+				@echo ""
+				norminette Libft
+				@echo ""
+				norminette srcs
+				@echo ""
+				norminette includes
+				@echo ""
+
+.PHONY		:	all bonus clean fclean re n

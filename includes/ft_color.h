@@ -34,5 +34,6 @@
 # define SCYAN "\e[4;36m"
 
 # define IPURPLE "\e[3;38;5;128m"
+# define BORANGE "\e[1;38;2;255;165;0m"
 
 #endif

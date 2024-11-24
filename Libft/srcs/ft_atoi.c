@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebarguil <ebarguil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 20:21:58 by ebarguil          #+#    #+#             */
-/*   Updated: 2022/10/06 20:51:30 by ebarguil         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:06:53 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+int	ft_atoi_c(const char c)
+{
+	long	res;
+
+	res = 0;
+	if (c >= '0' && c <= '9')
+		res = res * 10 + (c - '0');
+	else
+		return (c);
+	return ((int)res);
+}
 
 int	ft_atoi(const char *str)
 {
