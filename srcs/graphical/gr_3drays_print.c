@@ -54,6 +54,7 @@ void 	draw_Wall(t_admin *admin, t_map *map, t_mlx *mlx, double dist)
 	int lineH;
 	int baseline;
 	int stopline;
+	//float text;
 	
 	if (dist < 1)
 		dist = 1;
@@ -91,6 +92,36 @@ void 	draw_Wall(t_admin *admin, t_map *map, t_mlx *mlx, double dist)
 	}
 }
 
+void	choise_Text(t_admin *admin, t_rays *rays)
+{
+	if (rays->distV < rays->distH)
+	{
+		if (rays->ra <= (PI / 2) || rays->ra > (3 * (PI / 2)))
+		{
+			rays->color = CYAN_PIXEL;
+			admin->player->text = 'W'; // West texture			
+		}
+		if (rays->ra > (PI / 2) && rays->ra <= (3 * (PI / 2)))
+		{
+			rays->color = YELLOW_PIXEL;
+			admin->player->text = 'E'; // East texture
+		}
+	}
+	else
+	{
+		if (rays->ra >= 0 && rays->ra < PI)
+		{
+			rays->color = WHITE_PIXEL;
+			admin->player->text = 'S'; // South texture			
+		}
+		if (rays->ra >= PI && rays->ra < (2 * PI))
+		{
+			rays->color = GREEN_PIXEL;
+			admin->player->text = 'N'; // North texture
+		}
+	}
+}
+
 void	drawLine(t_admin *admin, t_mlx *mlx)
 {
 //printf(GREEN"player->px = %d | player->py = %d | adresse player= %p"RESET"\n", admin->player->px, admin->player->py, admin->player );
@@ -112,6 +143,7 @@ void	drawLine(t_admin *admin, t_mlx *mlx)
 	}
 	dist = sqrt((admin->rays->rx - admin->player->px) * (admin->rays->rx - admin->player->px) + (admin->rays->ry - admin->player->py) * (admin->rays->ry - admin->player->py));
 	admin->rays->distF = dist;
+	choise_Text(admin, admin->rays);
 	while (x < 100)
 	{
 		// dist = admin->player->px + (cos(admin->rays->ra) * x * (admin->rays->rx /100));
@@ -125,7 +157,7 @@ void	drawLine(t_admin *admin, t_mlx *mlx)
 			// if (admin->rays->distV < admin->rays->distH)
 			// 	my_mlx_pixel_put(mlx, finalx, finaly, FGREEN_PIXEL);
 			// else
-				my_mlx_pixel_put(mlx, finalx, finaly, GREEN_PIXEL);
+				my_mlx_pixel_put(mlx, finalx, finaly, admin->rays->color);
 		}	
 		x++;
 	}
