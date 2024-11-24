@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_verify_close_map.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebarguil <ebarguil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:03:22 by ebarguil          #+#    #+#             */
-/*   Updated: 2022/11/02 20:04:39 by ebarguil         ###   ########.fr       */
+/*   Updated: 2022/11/12 16:20:13 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ bool	ft_verify_close(t_map *map, int x, int y)
 	int	xx;
 
 	yy = y - 1;
-	xx = x - 1;
+	//xx = x - 1;
 	while (yy != y + 2)
 	{
+		xx = x - 1;
 		if (yy < 0 || yy > map->nbline)
 			return (false);
 		while (xx != x + 2)

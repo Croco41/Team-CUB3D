@@ -6,7 +6,7 @@
 /*   By: cgranja <cgranja@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 15:47:09 by cgranja           #+#    #+#             */
-/*   Updated: 2022/11/07 17:55:53 by cgranja          ###   ########.fr       */
+/*   Updated: 2022/11/12 16:31:24 by cgranja          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,11 @@ int	render(t_admin *admin)
 	use_key(admin);
 	black_image(admin);
 	drawrays3d(admin, admin->player, admin->rays, admin->map);
-	drawmap2d(admin->mlx, admin->map);
-	drawplayer(admin, admin->mlx, admin->player);
+	if (W_HEIGHT > 10 && W_WIDTH > 10)
+	{
+		drawmap2d(admin->mlx, admin->map);
+		drawplayer(admin, admin->mlx, admin->player);
+	}
 	mlx_put_image_to_window(admin->mlx->mlx_ptr, admin->mlx->mlx_win,
 		admin->mlx->imgame, 0, 0);
 	return (0);
